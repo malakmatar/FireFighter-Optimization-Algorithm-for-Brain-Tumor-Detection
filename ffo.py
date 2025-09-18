@@ -345,24 +345,24 @@ class FirefighterOptimization:
 def make_cfg(mode: str, seed: int) -> FFOConfig:
     if mode == "test":
         return FFOConfig(
-            num_agents=8,
+            num_agents=16,
             max_iter=8,
-            no_improve_limit=12,
-            crossover_probability=0.35,
+            no_improve_limit=6,
+            crossover_probability=0.40,
             mutation_probability=0.70,
-            step_size=0.20,
+            step_size=0.25,
             initial_temp=1.0,
             cooling_rate=0.95,
-            stagnation_perturb_after=6,
-            perturb_base=0.08,
-            perturb_growth=0.01,
+            stagnation_perturb_after=5,
+            perturb_base=0.05,
+            perturb_growth=0.008,
             seed=seed,
         )
     elif mode == "full":
         return FFOConfig(
-            num_agents=64,
-            max_iter=40,
-            no_improve_limit=40,
+            num_agents=32,
+            max_iter=20,
+            no_improve_limit=30,
             crossover_probability=0.50,
             mutation_probability=0.70,
             step_size=0.30,
