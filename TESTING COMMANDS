@@ -1,9 +1,0 @@
-TESTING CLI FOR FFO
-python -u ffo.py --mode full \
-  --dense-min 128 --dense-max 512 \
-  --dropout-min 0.25 --dropout-max 0.55 \
-  --lr-min 5e-5 --lr-max 3e-4 \
-  --batch-min 16 --batch-max 64 \
-  --l2-min 1e-7 --l2-max 1e-5 \
-  --epochs-fixed-full 10 \
-  --seed 42
