@@ -409,22 +409,40 @@ def minimize_neg_accuracy(space: ParamSpace, arrays, cache_file: Path | None, fi
 # and comparable across FFO/PSO/GWO. JSON is human‑readable for quick diffing.
 
 
-def save_run(out_dir: Path, spec: SpaceSpec, cfg: FFOConfig, res: FFOResult, best_h: Dict[str, float | int], cache_file: Path | None):
+def save_run(out_dir: Path, spec: "SpaceSpec", cfg: "PSOConfig",
+             best_v: np.ndarray, space: ParamSpace, best_score: float,
+             history_acc: List[float], wall_time: float, cache_file: Path | None) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "space.json").write_text(json.dumps(asdict(spec), indent=2))
     (out_dir / "config.json").write_text(json.dumps(asdict(cfg), indent=2))
+
+    best_h = space.vec_to_hparams(best_v, fixed_epochs=cfg.fixed_epochs)
     (out_dir / "result.json").write_text(json.dumps({
         "best_hparams": best_h,
-        "best_val_accuracy": res.best_val_accuracy,
-        "history_best_acc": res.history_best_acc,
-        "eval_count": res.eval_count,
-        "wall_time_sec": res.wall_time_sec,
+        "best_val_accuracy": float(-best_score),  # score is -acc
+        "history_best_acc": [float(a) for a in history_acc],
+        "eval_count": int(cfg.num_agents * min(cfg.max_iter, len(history_acc))),
+        "wall_time_sec": float(wall_time),
     }, indent=2))
+
+    # NEW: write convergence CSV here (out_dir is known)
+    try:
+        import csv
+        with open(out_dir / "search_history.csv", "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["iteration", "best_val_acc"])
+            for i, acc in enumerate(history_acc):
+                w.writerow([i, float(acc)])
+    except Exception as e:
+        print(f"[FFO] WARN: failed to write search_history.csv: {e}", flush=True)
+
     if cache_file and cache_file.exists():
         try:
             (out_dir / "objective_cache.json").write_text(cache_file.read_text())
         except Exception:
             pass
+
+
 
 
 def main(argv: List[str] | None = None) -> int:

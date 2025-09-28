@@ -22,6 +22,7 @@ from pathlib import Path
 from typing import Dict, List, Tuple, Any, Optional
 
 import numpy as np
+import pandas as pd
 
 # Reuse mapping + IO helpers from ffo.py to guarantee consistency
 from ffo import SpaceSpec, ParamSpace, load_arrays
@@ -209,11 +210,23 @@ def save_run(out_dir: Path, spec: "SpaceSpec", cfg: "PSOConfig",
         "wall_time_sec": float(wall_time),
     }, indent=2))
 
+    # NEW: write convergence CSV here (out_dir is known)
+    try:
+        import csv
+        with open(out_dir / "search_history.csv", "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["iteration", "best_val_acc"])
+            for i, acc in enumerate(history_acc):
+                w.writerow([i, float(acc)])
+    except Exception as e:
+        print(f"[PSO] WARN: failed to write search_history.csv: {e}", flush=True)
+
     if cache_file and cache_file.exists():
         try:
             (out_dir / "objective_cache.json").write_text(cache_file.read_text())
         except Exception:
             pass
+
 
 
 # --------------------------- Config & CLI -----------------------------------
@@ -229,7 +242,7 @@ class PSOConfig:
 
 def make_cfg(mode: str, seed: int, fixed_epochs: int) -> PSOConfig:
     if mode == "test":
-        return PSOConfig(n_particles=16, n_iters=8, c1=2.0, c2=2.0, seed=seed, fixed_epochs=fixed_epochs)
+        return PSOConfig(n_particles=4, n_iters=3, c1=2.0, c2=2.0, seed=seed, fixed_epochs=fixed_epochs)
     elif mode == "full":
         return PSOConfig(n_particles=24, n_iters=20, c1=2.0, c2=2.0, seed=seed, fixed_epochs=fixed_epochs)
     else:
@@ -258,7 +271,10 @@ def main(argv: List[str] | None = None) -> int:
     ap.add_argument("--batch-max", type=int, default=32)
     ap.add_argument("--l2-min", type=float, default=1e-6)
     ap.add_argument("--l2-max", type=float, default=1e-3)
+    ap.add_argument("--particles", type=int, default=None, help="override n_particles")
+    ap.add_argument("--iters", type=int, default=None, help="override n_iters")
     args = ap.parse_args(argv)
+
 
     rng = np.random.default_rng(args.seed)
 
@@ -294,7 +310,14 @@ def main(argv: List[str] | None = None) -> int:
     print(f"[PSO] Fixed epochs this run: {fixed_epochs}", flush=True)
 
     cfg = make_cfg(args.mode, seed=args.seed, fixed_epochs=fixed_epochs)
-    objective = minimize_neg_accuracy(space, arrays, Path(args.cache) if args.cache else None, fixed_epochs=fixed_epochs)
+    objective = minimize_neg_accuracy(space, arrays, Path(args.cache) if args.cache else None,
+                                      fixed_epochs=fixed_epochs)
+
+    # overrides
+    if args.particles is not None:
+        cfg.n_particles = int(args.particles)
+    if args.iters is not None:
+        cfg.n_iters = int(args.iters)
 
     # PSO setup on normalized hypercube [0,1]^D
     D = space.dim
@@ -320,6 +343,10 @@ def main(argv: List[str] | None = None) -> int:
     history_acc = [float(-h["gbest_score"]) for h in result.history]
     best_v = result.best_position.copy()
     best_acc = float(-result.best_score)
+    traj_df = pd.DataFrame({
+        "iteration": list(range(len(history_acc))),  # 0 .. n_iters
+        "best_val_acc": history_acc
+    })
 
     # Reveal best hyperparams
     best_h = space.vec_to_hparams(best_v, fixed_epochs=fixed_epochs)
