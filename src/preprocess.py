@@ -21,16 +21,16 @@ Output:
 
 Folder structure after running this script:
 ├── raw_data/
- │   ├── Training/
- │   ├── Testing/
- │   └── Combined/             created if --use-kaggle-test is False
+│   ├── Training/
+│   ├── Testing/
+│   └── Combined/             created if --use-kaggle-test is False
 ├── data/
- │   ├── train/
- │   ├── val/
- │   └── test/
+│   ├── train/
+│   ├── val/
+│   └── test/
 ├── train_X.npy, train_y.npy ...
 ├── split_seed.json
-├── experiment_config.json
+└── experiment_config.json
 
 """
 
