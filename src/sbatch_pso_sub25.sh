@@ -23,5 +23,5 @@ export NO_PROXY="*"
 echo "===================== NVIDIA SMI ====================="
 nvidia-smi || { echo "nvidia-smi not found or GPU not visible"; exit 1; }
 
-echo "===================== PSO FINAL (25% data, FE=110) ====================="
-srun --ntasks=1 --cpu-bind=cores --gpu-bind=map_gpu:0 python -u src/pso.py   --mode full   --data-dir .   --results-dir runs/pso_final_sub25   --seed 42   --epochs-fixed-full 8   --subset-frac 0.25   --agents 10   --iters 10   --cache ""   --dense-min 128 --dense-max 512   --dropout-min 0.25 --dropout-max 0.55   --lr-min 1e-5 --lr-max 5e-4   --batch-min 16 --batch-max 32   --l2-min 1e-6 --l2-max 1e-4
+echo "===================== PSO FINAL (25% data, particles=10, iters=10) ====================="
+srun --ntasks=1 --cpu-bind=cores --gpu-bind=map_gpu:0 python -u src/pso.py   --mode full   --data-dir .   --results-dir runs/pso_final_sub25   --seed 42   --epochs-fixed-full 8   --subset-frac 0.25   --particles 10   --iters 10   --cache ""   --dense-min 128 --dense-max 512   --dropout-min 0.25 --dropout-max 0.55   --lr-min 1e-5 --lr-max 5e-4   --batch-min 16 --batch-max 32   --l2-min 1e-6 --l2-max 1e-4
