@@ -4,6 +4,9 @@ from tensorflow.keras import layers, models, regularizers, backend as K
 from tensorflow.keras.applications import VGG16
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 from tensorflow.keras.optimizers import legacy as legacy_optimizers
+import gc, tensorflow as tf
+tf.keras.backend.clear_session()
+gc.collect()
 
 _gpus = tf.config.list_physical_devices("GPU")
 if _gpus:
