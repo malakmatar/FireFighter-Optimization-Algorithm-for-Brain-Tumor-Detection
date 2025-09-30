@@ -3,7 +3,7 @@ import tensorflow as tf
 from tensorflow.keras import layers, models, regularizers, backend as K
 from tensorflow.keras.applications import VGG16
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
-from tensorflow.keras.optimizers import legacy as legacy_optimizers
+from tensorflow.keras.optimizers import Adam
 import gc, tensorflow as tf
 tf.keras.backend.clear_session()
 gc.collect()
@@ -55,7 +55,7 @@ def evaluate_model(hparams, train_X, train_y, val_X, val_y):
     try:
         K.clear_session()
         model = _build_vgg16_classifier(hparams)
-        opt = legacy_optimizers.Adam(learning_rate=lr)
+        opt = Adam(learning_rate=lr)
         model.compile(optimizer=opt, loss="sparse_categorical_crossentropy", metrics=["accuracy"])
         cbs = [
             EarlyStopping(monitor="val_accuracy", patience=2, restore_best_weights=True),
