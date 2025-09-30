@@ -1,40 +1,31 @@
-"""
-Model builder + evaluate_model wrapper (VGG16 backbone)
-
-This script performs the following tasks:
-1. Constructs a VGG16-based classifier with optional fine-tuning depth
-2. Compiles with Adam optimizer and categorical crossentropy
-3. Trains with early stopping and LR scheduling, returns best val_accuracy
-
-Usage:
-    Pipelined with ffo.py to evaluate all of the agents performances with diffrient hyperparameters
-"""
-
-
+import gc
 import tensorflow as tf
-from tensorflow.keras import layers, models, regularizers
+from tensorflow.keras import layers, models, regularizers, backend as K
 from tensorflow.keras.applications import VGG16
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
+from tensorflow.keras.optimizers import legacy as legacy_optimizers
+import gc, tensorflow as tf
+tf.keras.backend.clear_session()
+gc.collect()
 
+_gpus = tf.config.list_physical_devices("GPU")
+if _gpus:
+    for _g in _gpus:
+        try:
+            tf.config.experimental.set_memory_growth(_g, True)
+        except Exception:
+            pass
 
-ReduceLROnPlateau(monitor="val_accuracy", factor=0.5, patience=1, min_lr=1e-6),  # gently lower LR when plateaus are detected
-
-def evaluate_model(
-    #Train a model with provided hparams and data, return max validation accuracy as float
-hparams, train_X, train_y, val_X, val_y):
+def _build_vgg16_classifier(hparams, input_shape=(224, 224, 3), n_classes=4):
     dense_units = int(hparams["dense_units"])
     dropout = float(hparams["dropout_rate"])
-    lr = float(hparams["learning_rate"])
-    bs = int(hparams["batch_size"])
     l2wd = float(hparams.get("l2_weight_decay", 0.0))
     unfreeze = int(hparams.get("unfrozen_blocks", 0))
-    EPOCHS = int(hparams.get("epochs", 3))  # fixed per mode by ffo.py
+    reg = regularizers.l2(l2wd) if l2wd > 0 else None
 
-    base = VGG16(include_top=False, weights="imagenet", input_shape=(224, 224, 3))
+    base = VGG16(include_top=False, weights="imagenet", input_shape=input_shape)
     for layer in base.layers:
         layer.trainable = False
-
-    # Unfreeze depth if requested
     if unfreeze >= 1:
         for layer in base.layers:
             if layer.name.startswith("block5"):
@@ -43,35 +34,54 @@ hparams, train_X, train_y, val_X, val_y):
         for layer in base.layers:
             if layer.name.startswith(("block4", "block5")):
                 layer.trainable = True
-        lr *= 0.3  # safer LR when fine-tuning deeper
-
-    reg = regularizers.l2(l2wd) if l2wd > 0 else None
 
     x = base.output
-    x = layers.Flatten()(x)  # simple head to keep comparisons fair
+    x = layers.Flatten()(x)
     x = layers.Dense(dense_units, activation="relu", kernel_regularizer=reg)(x)
     x = layers.Dropout(dropout)(x)
-    out = layers.Dense(4, activation="softmax", kernel_regularizer=reg)(x)
+    out = layers.Dense(n_classes, activation="softmax", kernel_regularizer=reg)(x)
+    return models.Model(inputs=base.input, outputs=out)
 
-    model = models.Model(inputs=base.input, outputs=out)
-    model.compile(
-        optimizer=tf.keras.optimizers.Adam(learning_rate=lr),
-        loss="sparse_categorical_crossentropy",   # <-- use sparse for integer labels
-        metrics=["accuracy"]
-    )
+def evaluate_model(hparams, train_X, train_y, val_X, val_y):
+    lr = float(hparams["learning_rate"])
+    bs = int(hparams["batch_size"])
+    epochs = int(hparams.get("epochs", 3))
+    unfreeze = int(hparams.get("unfrozen_blocks", 0))
+    if unfreeze >= 2:
+        lr *= 0.3
 
-    cbs = [
-        EarlyStopping(monitor="val_accuracy", patience=2, restore_best_weights=True),
-        ReduceLROnPlateau(monitor="val_accuracy", factor=0.5, patience=1, min_lr=1e-6),  # gently lower LR when plateaus are detected
-    ]
-
-    hist = model.fit(
-        train_X, train_y,
-        validation_data=(val_X, val_y),
-        epochs=EPOCHS,
-        batch_size=bs,
-        callbacks=cbs,
-        verbose=0
-    )
-
-    return float(max(hist.history["val_accuracy"]))
+    model = None
+    history = None
+    try:
+        K.clear_session()
+        model = _build_vgg16_classifier(hparams)
+        opt = legacy_optimizers.Adam(learning_rate=lr)
+        model.compile(optimizer=opt, loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+        cbs = [
+            EarlyStopping(monitor="val_accuracy", patience=2, restore_best_weights=True),
+            ReduceLROnPlateau(monitor="val_accuracy", factor=0.5, patience=1, min_lr=1e-6),
+        ]
+        history = model.fit(
+            train_X, train_y,
+            validation_data=(val_X, val_y),
+            epochs=epochs,
+            batch_size=bs,
+            callbacks=cbs,
+            verbose=0,
+        )
+        return float(max(history.history["val_accuracy"]))
+    finally:
+        try:
+            del history
+        except Exception:
+            pass
+        try:
+            del model
+        except Exception:
+            pass
+        K.clear_session()
+        gc.collect()
+        try:
+            tf.compat.v1.reset_default_graph()
+        except Exception:
+            pass
