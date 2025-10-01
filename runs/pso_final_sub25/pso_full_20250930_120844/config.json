@@ -1,0 +1,8 @@
+{
+  "n_particles": 10,
+  "n_iters": 10,
+  "c1": 2.0,
+  "c2": 2.0,
+  "seed": 42,
+  "fixed_epochs": 8
+}
