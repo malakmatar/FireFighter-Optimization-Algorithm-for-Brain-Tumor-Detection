@@ -2,10 +2,7 @@
 """
 pso.py  (FFO-adapted, single file)
 ----------------------------------
-Kennedy & Eberhart (1995) simplified global-best PSO with an interface and CLI
-that mirrors your ffo.py harness: normalized [0,1] search space, identical flags,
-same evaluate_model objective, same logging/artifacts.
-
+impelemntatin of the particle swarm optimizer
 Usage examples:
     python pso.py --mode test --data-dir . --results-dir results --seed 42
     python pso.py --mode full --data-dir . --results-dir results --seed 1 --subset-frac 0.5
@@ -24,7 +21,7 @@ from typing import Dict, List, Tuple, Any, Optional
 import numpy as np
 import pandas as pd
 
-# Reuse mapping + IO helpers from ffo.py to guarantee consistency
+#reuse same functions as ffo to be consisitent
 from ffo import SpaceSpec, ParamSpace, load_arrays
 
 
@@ -41,8 +38,6 @@ class PSOResult:
 
 class PSO:
     """
-    Particle Swarm Optimization - Kennedy & Eberhart (1995) simplified global-best form.
-
     Velocity update:
         v <- v + 2*rand()*(pbest - x) + 2*rand()*(gbest - x)
         x <- x + v
@@ -85,7 +80,6 @@ class PSO:
         low, high = self.bounds[:, 0], self.bounds[:, 1]
         span = high - low
 
-        # Initialize positions
         if x0 is None:
             X = self.rng.uniform(low, high, size=(self.n_particles, self.D))
         else:
@@ -93,10 +87,10 @@ class PSO:
             assert X.shape == (self.n_particles, self.D)
             X = np.clip(X, low, high)
 
-        # Initialize velocities (small random fraction of range)
+        # initial v
         V = self.rng.uniform(-1.0, 1.0, size=(self.n_particles, self.D)) * (self.v_init_scale * span)
 
-        # Evaluate initial
+        # Evaluate initials
         scores = np.apply_along_axis(self._eval, 1, X)
         pbest_pos = X.copy()
         pbest_scores = scores.copy()
@@ -122,7 +116,7 @@ class PSO:
 
             X = X + V
 
-            # Bound handling: clip and reflect small part of velocity when hitting bounds
+            # for bounds
             out_low = X < low
             out_high = X > high
             if np.any(out_low | out_high):
