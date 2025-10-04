@@ -32,7 +32,7 @@ nvidia-smi || { echo "nvidia-smi not found or GPU not visible"; exit 1; }
 echo "===================== FFO FINAL (25% data, FE=250, 12 agents, seed=123) ====================="
 srun --ntasks=1 --cpu-bind=cores --gpu-bind=map_gpu:0 python -u src/ffo.py --mode full \
   --data-dir . --results-dir runs/ffo_final_sub25_FE250_s123 \
-  --subset-frac 0.25 --agents 12 --iters 999 --eval-budget 250 --cache "" \
+  --subset-frac 0.25 --agents 12 --iters 999 --eval-budget 252 --cache "" \
   --dense-min 128 --dense-max 512 \
   --dropout-min 0.25 --dropout-max 0.55 \
   --lr-min 1e-5 --lr-max 5e-4 \
