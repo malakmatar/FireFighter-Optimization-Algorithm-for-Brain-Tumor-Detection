@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=ffo_sub25
+#SBATCH --job-name=ffo_sub25_FE250_s123
 #SBATCH --time=1-00:00:00
 #SBATCH --nodes=1
 #SBATCH --gpus=1
@@ -7,7 +7,7 @@
 #SBATCH --exclusive
 #SBATCH --partition=boost_usr_prod
 #SBATCH --account=IscrC_ASCEND
-#SBATCH --output=job_ffo_sub25_%j.out
+#SBATCH --output=job_ffo_sub25_FE250_s123_%j.out
 
 module purge
 module load python
@@ -21,17 +21,22 @@ export MKL_NUM_THREADS=${OMP_NUM_THREADS}
 export KERAS_HOME="$HOME/FireFighter-Optimization-Algorithm-for-Brain-Tumor-Detection/.keras"
 export NO_PROXY="*"
 
+# Stabilize XLA and enable mixed precision
+export TF_XLA_FLAGS="--tf_xla_auto_jit=0"
+export XLA_FLAGS="--xla_gpu_autotune_level=1"
+export USE_MIXED_PRECISION=1
+
 echo "===================== NVIDIA SMI ====================="
 nvidia-smi || { echo "nvidia-smi not found or GPU not visible"; exit 1; }
 
-echo "===================== FFO FINAL (25% data, FE=110) ====================="
+echo "===================== FFO FINAL (25% data, FE=250, 12 agents, seed=123) ====================="
 srun --ntasks=1 --cpu-bind=cores --gpu-bind=map_gpu:0 python -u src/ffo.py --mode full \
-  --data-dir . --results-dir runs/ffo_final_sub25 \
-  --subset-frac 0.25 --agents 10 --iters 999 --eval-budget 110 --cache "" \
+  --data-dir . --results-dir runs/ffo_final_sub25_FE250_s123 \
+  --subset-frac 0.25 --agents 12 --iters 999 --eval-budget 250 --cache "" \
   --dense-min 128 --dense-max 512 \
   --dropout-min 0.25 --dropout-max 0.55 \
   --lr-min 1e-5 --lr-max 5e-4 \
   --batch-min 16 --batch-max 32 \
   --l2-min 1e-6 --l2-max 1e-4 \
   --epochs-fixed-full 8 \
-  --seed 42
+  --seed 123
