@@ -31,8 +31,9 @@ nvidia-smi || { echo "nvidia-smi not found or GPU not visible"; exit 1; }
 
 
 echo "===================== LAUNCHING FFO ====================="
-srun --ntasks=1 --cpu-bind=cores --gpu-bind=map_gpu:0 python -u src/ffo.py --mode full \
-  --data-dir . --results-dir runs/ffo_full \
+srun --ntasks=1 --cpu-bind=cores --gpu-bind=map_gpu:0 python -u src/pso.py --mode full \
+  --data-dir . --results-dir runs/pso_full \
+  --particles 32 --iters 20 --cache "" \
   --dense-min 128 --dense-max 512 \
   --dropout-min 0.25 --dropout-max 0.55 \
   --lr-min 5e-5 --lr-max 3e-4 \
