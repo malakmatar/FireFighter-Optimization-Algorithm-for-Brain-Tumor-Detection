@@ -39,4 +39,4 @@ srun --ntasks=1 --cpu-bind=cores --gpu-bind=map_gpu:0 python -u src/pso.py --mod
   --batch-min 16 --batch-max 32 \
   --l2-min 1e-6 --l2-max 1e-4 \
   --epochs-fixed-full 8 \
-  --seed 123
+  --seed 222
