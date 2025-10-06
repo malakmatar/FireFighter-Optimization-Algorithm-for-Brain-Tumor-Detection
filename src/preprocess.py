@@ -129,23 +129,76 @@ def split_dataset():
             shutil.rmtree(combined_path)
         os.makedirs(combined_path)
 
-        for source in [train_path, test_path]:
-            if not os.path.exists(source):
-                print(f"Warning: {source} not found. Skipping.")
-                continue
+        # --- begin: robust merge with unique filenames + audit ---
+        exts = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff"}
+        report = {
+            "train_counts": {},
+            "test_counts": {},
+            "combined_counts": {},
+            "collisions_renamed": 0,
+            "skipped": []
+        }
 
-            for category in os.listdir(source):
-                src_dir = os.path.join(source, category)
+        def list_images(d):
+            out = []
+            for p in os.listdir(d):
+                fp = os.path.join(d, p)
+                if os.path.isfile(fp):
+                    ext = os.path.splitext(fp)[1].lower()
+                    if ext in exts:
+                        out.append(fp)
+            return out
+
+        def copy_split(base_dir, split_tag):
+            nonlocal report
+            if not os.path.exists(base_dir):
+                print(f"Warning: {base_dir} not found. Skipping.")
+                return
+            for category in os.listdir(base_dir):
+                src_dir = os.path.join(base_dir, category)
                 if not os.path.isdir(src_dir):
                     continue
-
                 dst_dir = os.path.join(combined_path, category)
                 os.makedirs(dst_dir, exist_ok=True)
 
-                for fname in os.listdir(src_dir):
-                    src_file = os.path.join(src_dir, fname)
-                    if os.path.isfile(src_file):
-                        shutil.copy(src_file, os.path.join(dst_dir, fname))
+                files = list_images(src_dir)
+                report_key = "train_counts" if split_tag == "train" else "test_counts"
+                report.setdefault(report_key, {})
+                report[report_key][category] = len(files)
+
+                for src_file in files:
+                    base = os.path.basename(src_file)
+                    stem, ext = os.path.splitext(base)
+                    # prefix with split to avoid train/test name collisions
+                    cand_name = f"{split_tag}_{stem}{ext}"
+                    dst_file = os.path.join(dst_dir, cand_name)
+                    # ensure uniqueness if even that collides
+                    k = 1
+                    while os.path.exists(dst_file):
+                        cand_name = f"{split_tag}_{stem}_{k}{ext}"
+                        dst_file = os.path.join(dst_dir, cand_name)
+                        k += 1
+                        report["collisions_renamed"] += 1
+                    try:
+                        shutil.copy2(src_file, dst_file)
+                    except Exception as e:
+                        report["skipped"].append({"file": src_file, "reason": f"copy_error:{e}"})
+
+        copy_split(train_path, "train")
+        copy_split(test_path, "test")
+
+        # post-merge counts
+        for category in os.listdir(combined_path):
+            cdir = os.path.join(combined_path, category)
+            if os.path.isdir(cdir):
+                report["combined_counts"][category] = len([f for f in os.listdir(cdir)
+                                                           if os.path.isfile(os.path.join(cdir, f)) and
+                                                           os.path.splitext(f)[1].lower() in exts])
+
+        with open(os.path.join(combined_path, "combine_report.json"), "w") as f:
+            json.dump(report, f, indent=2)
+        print("[combine] wrote", os.path.join(combined_path, "combine_report.json"))
+        # merge with uniqe filenames to not overwrite files
 
         source_path = combined_path
 
@@ -224,6 +277,8 @@ def preprocess(split="train", img_size=224):
             try:
                 img_path = os.path.join(path, img_name)
                 img = cv2.imread(img_path)
+                if img is None:
+                    continue
                 img = cv2.resize(img, (img_size, img_size))
                 X.append(img)
                 y.append(idx)
@@ -305,5 +360,3 @@ if __name__ == "__main__":
         json.dump(existing_config, f, indent=4)
 
     print("Saved experiment configuration to experiment_config.json")
-
-

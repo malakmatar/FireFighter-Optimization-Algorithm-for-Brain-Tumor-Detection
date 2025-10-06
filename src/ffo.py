@@ -1,12 +1,7 @@
 #!/usr/bin/env python3
 """
 ffo.py — Firefighter Optimization (FFO) for VGG16 Hyperparameter Tuning
-
-Paper-faithful implementation with a 'paper mode' toggle and a PSO-matching harness:
-- Normalized [0,1]^D search space identical to PSO
-- evaluate_model objective from train_wrapper.py
-- CLI and outputs that mirror PSO (space.json, config.json, result.json, search_history.csv)
-- Caching of objective evaluations
+used for initialziation of the populateion and parameter adjustments
 """
 
 from __future__ import annotations
@@ -27,7 +22,7 @@ import numpy as np
 # --------------------------- Utilities & seeding ---------------------------------------
 
 def set_global_seed(seed: int) -> None:
-    """Set NumPy/Python/TensorFlow seeds for reproducibility and enable TF memory growth."""
+    """for reproducability"""
     random.seed(seed)
     np.random.seed(seed)
     try:
@@ -46,7 +41,6 @@ def set_global_seed(seed: int) -> None:
 
 @dataclass
 class SpaceSpec:
-    """Declarative bounds for each hyperparameter (including log-scaled ones)."""
     dense_units_min: int = 128
     dense_units_max: int = 512
     dropout_min: float = 0.25
@@ -71,7 +65,6 @@ class SpaceSpec:
 
 
 def _round_multiple(x: int, m: int) -> int:
-    """Round integers to nearest multiple (used for batch sizes, etc.)."""
     return int(max(m, int(round(x / m) * m)))
 
 
@@ -147,7 +140,7 @@ def load_arrays(data_dir: Path) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.
 
 
 def _eval_accuracy(hparams: Dict[str, float | int], arrays) -> float:
-    from train_wrapper import evaluate_model  # project-local import
+    from train_wrapper import evaluate_model
     train_X, train_y, val_X, val_y = arrays
     print(f"[FFO] evaluate_model() starting with hparams={hparams}", flush=True)
     acc = float(evaluate_model(hparams, train_X, train_y, val_X, val_y))
@@ -161,15 +154,15 @@ def _eval_accuracy(hparams: Dict[str, float | int], arrays) -> float:
 class FFOConfig:
     """
     Algorithm hyperparameters controlling population size and operators.
-    Includes 'paper_mode' and termination toggles to match the original paper when needed.
+    there's a paper mode to use exactly the same parameters that were used in the paper that can be toglled
     """
     # population / budget
     num_agents: int
     max_iter: int
     # termination
     no_improve_limit: int
-    use_additional_conditions: bool = False   # paper: OFF/ON block
-    target_fitness: float | None = None       # minimize -acc; e.g., -0.90 to target 0.90 acc
+    use_additional_conditions: bool = False   # paper: OFF/ON
+    target_fitness: float | None = None       # there's no specifi aimed fittness just minimize -acc; e.g., -0.90 to target 0.90 acc
     # operators
     crossover_probability: float = 0.5
     mutation_probability: float = 0.7
@@ -229,6 +222,12 @@ class FirefighterOptimization:
 
     # ----------------------- operators -------------------------------------------------
 
+    def _maybe_update_global_best(self, vec: np.ndarray, f: float):
+        if f < self.best_fit - 1e-12:
+            self.best_fit = float(f)
+            self.best_agent = vec.copy()
+            self.no_improve = 0
+
     def evaluate_agents(self) -> np.ndarray:
         if self.verbose:
             print(f"[FFO] Evaluating population ({len(self.agents)} agents) ...", flush=True)
@@ -239,13 +238,9 @@ class FirefighterOptimization:
             fits_list.append(f)
             if self.verbose:
                 print(f"[FFO] agent {i}/{total} -> acc={-f:.4f}", flush=True)
+            self._maybe_update_global_best(a, f)
         fits = np.asarray(fits_list)
-        bi = int(np.argmin(fits))
-        if fits[bi] < self.best_fit - 1e-12:
-            self.best_fit = float(fits[bi])
-            self.best_agent = self.agents[bi].copy()
-            self.no_improve = 0
-        else:
+        if fits.min() >= self.best_fit - 1e-12:
             self.no_improve += 1
         self.eval_count += len(fits)
         return fits
@@ -261,6 +256,7 @@ class FirefighterOptimization:
         best_local = agent.copy()
         best_fit = self.obj(best_local)
         self.eval_count += 1
+        self._maybe_update_global_best(best_local, best_fit)
         # paper-ish try schedule; configurable
         tries = 10 + 5 * (self.no_improve // 100) if self.cfg.paper_mode else (6 + (self.no_improve // 50))
         sigma = self.cfg.step_size * self.mutation_rates[idx]
@@ -269,9 +265,9 @@ class FirefighterOptimization:
             cand = np.clip(cand, self.lb, self.ub)
             f = self.obj(cand)
             self.eval_count += 1
-            # accept if better OR by Metropolis at temperature temp
             if f < best_fit or np.random.rand() < math.exp((best_fit - f) / max(1e-12, temp)):
                 best_local, best_fit = cand, f
+                self._maybe_update_global_best(best_local, best_fit)
         return best_local
 
     def apply_perturbation(self, agent: np.ndarray, intensity: float) -> np.ndarray:
@@ -301,12 +297,12 @@ class FirefighterOptimization:
                     j = (j + 1) % N
                 c1, c2 = self.crossover(self.agents[i], self.agents[j])
                 if self.cfg.paper_mode:
-                    # paper-faithful: replace BOTH parents
                     self.agents[i], self.agents[j] = c1, c2
                 else:
-                    # practical variant: keep better child for i
                     f1 = self.obj(c1); f2 = self.obj(c2)
                     self.eval_count += 2
+                    self._maybe_update_global_best(c1, f1)
+                    self._maybe_update_global_best(c2, f2)
                     self.agents[i] = c1 if f1 < f2 else c2
 
             # Local search (mutation)
@@ -315,7 +311,6 @@ class FirefighterOptimization:
 
             # Stagnation perturbation
             if self.cfg.paper_mode:
-                # Paper’s rule: after 50 non-improving iterations
                 if self.no_improve > 50:
                     intensity = 0.1 + 0.02 * (self.no_improve - 50)
                     self.agents[i] = self.apply_perturbation(self.agents[i], intensity)
@@ -351,22 +346,28 @@ class FirefighterOptimization:
         t0 = time.time()
         while not self.should_terminate():
             self.step()
+            fe_state = getattr(self.obj, "fe_counter", None)
+            if fe_state and fe_state.get("budget_reached", False):
+                if self.verbose:
+                    print(f"[FFO] Stopping early: FE budget reached ({fe_state['fe']}).")
+                break
             if self.verbose:
                 print(f"[FFO] iter={self.iteration-1:03d} best_acc={-self.best_fit:.4f} "
                       f"no_improve={self.no_improve} T={self.cooling_temperature():.4f}")
         wall = time.time() - t0
+        used_fe = int(getattr(self.obj, "fe_counter", {}).get("fe", self.eval_count))
         return FFOResult(
             best_vec=self.best_agent.copy(),
             best_val_accuracy=float(-self.best_fit),
             history_best_acc=self.fitness_history,
-            eval_count=int(self.eval_count),
+            eval_count=used_fe,
             wall_time_sec=float(wall),
         )
 
 
 # --------------------------- Objective glue with caching ------------------------------
 
-def minimize_neg_accuracy(space: ParamSpace, arrays, cache_file: Path | None, fixed_epochs: int):
+def minimize_neg_accuracy(space: ParamSpace, arrays, cache_file: Path | None, fixed_epochs: int, eval_budget: int | None = None):
     cache: Dict[str, float] = {}
     if cache_file and cache_file.exists():
         try:
@@ -377,20 +378,32 @@ def minimize_neg_accuracy(space: ParamSpace, arrays, cache_file: Path | None, fi
     def _hp_key(h: Dict[str, float | int]) -> str:
         return json.dumps({k: h[k] for k in sorted(h.keys())}, sort_keys=True)
 
+    state: Dict[str, Any] = {"fe": 0, "budget_reached": False, "best_acc_seen": None}
+
     def _obj(v: np.ndarray) -> float:
+        if eval_budget is not None and state["fe"] >= eval_budget:
+            state["budget_reached"] = True
+            return +1.0
         h = space.vec_to_hparams(v, fixed_epochs=fixed_epochs)
         k = _hp_key(h)
         if k in cache:
-            return -float(cache[k])
-        acc = _eval_accuracy(h, arrays)
-        if cache_file:
+            acc = float(cache[k])
+        else:
+            acc = _eval_accuracy(h, arrays)
             cache[k] = float(acc)
-            try:
-                cache_file.write_text(json.dumps(cache, indent=2))
-            except Exception:
-                pass
+            if cache_file:
+                try:
+                    cache_file.write_text(json.dumps(cache, indent=2))
+                except Exception:
+                    pass
+        state["fe"] += 1
+        if state["best_acc_seen"] is None or acc > state["best_acc_seen"]:
+            state["best_acc_seen"] = acc
+        if eval_budget is not None and state["fe"] >= eval_budget:
+            state["budget_reached"] = True
         return -float(acc)
 
+    setattr(_obj, "fe_counter", state)
     return _obj
 
 
@@ -411,7 +424,6 @@ def save_run(out_dir: Path, spec: SpaceSpec, cfg: FFOConfig, res: FFOResult,
         "wall_time_sec": float(res.wall_time_sec),
     }, indent=2))
 
-    # Write convergence CSV exactly like PSO
     try:
         import csv
         with open(out_dir / "search_history.csv", "w", newline="") as f:
@@ -445,7 +457,7 @@ def make_cfg(mode: str, seed: int, fixed_epochs: int, paper_mode: bool) -> FFOCo
             stagnation_perturb_after=5,
             perturb_base=0.05,
             perturb_growth=0.008,
-            use_additional_conditions=False,  # fair comparison OFF by default
+            use_additional_conditions=False,
             target_fitness=None,
             fixed_epochs=fixed_epochs,
             paper_mode=paper_mode,
@@ -568,7 +580,7 @@ def main(argv: List[str] | None = None) -> int:
 
     print(f"[FFO] Fixed epochs this run: {fixed_epochs}", flush=True)
     cache_path = Path(args.cache) if args.cache else None
-    objective = minimize_neg_accuracy(space, arrays, cache_path, fixed_epochs=fixed_epochs)
+    objective = minimize_neg_accuracy(space, arrays, cache_path, fixed_epochs=fixed_epochs, eval_budget=eval_budget)
 
     engine = FirefighterOptimization(
         objective_minimize=objective,
