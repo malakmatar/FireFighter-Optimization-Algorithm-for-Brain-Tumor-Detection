@@ -1,0 +1,983 @@
+Loading python/3.11.7
+  Loading requirement: bzip2/1.0.8-ib3znej libmd/1.0.4-2km2lxx
+    libbsd/0.12.1-oocs6an expat/2.6.2-p2t4wry ncurses/6.5-svfl57u
+    readline/8.2-zeda6mx gdbm/1.23-wiol7vk libiconv/1.17-nhc3mhm
+    xz/5.4.6-xxxg42c zlib-ng/2.1.6-jkgunjc libxml2/2.10.3-zbbe7lm
+    pigz/2.8-5bwzpml zstd/1.5.6-uq5yyux tar/1.34-jgektnv gettext/0.22.5-hsxgafg
+    libffi/3.4.6-4vs4jpp libxcrypt/4.4.35-7om46b5 sqlite/3.43.2-4kl5mnp
+    util-linux-uuid/2.38.1-5achpds
+===================== NVIDIA SMI =====================
+Mon Oct  6 16:00:18 2025       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 535.54.03              Driver Version: 535.54.03    CUDA Version: 12.2     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA A100-SXM-64GB           On  | 00000000:1D:00.0 Off |                    0 |
+| N/A   43C    P0              63W / 473W |      2MiB / 65536MiB |      0%      Default |
+|                                         |                      |             Disabled |
++-----------------------------------------+----------------------+----------------------+
+|   1  NVIDIA A100-SXM-64GB           On  | 00000000:56:00.0 Off |                    0 |
+| N/A   42C    P0              64W / 472W |      2MiB / 65536MiB |      0%      Default |
+|                                         |                      |             Disabled |
++-----------------------------------------+----------------------+----------------------+
+|   2  NVIDIA A100-SXM-64GB           On  | 00000000:8F:00.0 Off |                    0 |
+| N/A   43C    P0              60W / 461W |      2MiB / 65536MiB |      0%      Default |
+|                                         |                      |             Disabled |
++-----------------------------------------+----------------------+----------------------+
+|   3  NVIDIA A100-SXM-64GB           On  | 00000000:C8:00.0 Off |                    0 |
+| N/A   43C    P0              59W / 457W |      2MiB / 65536MiB |      0%      Default |
+|                                         |                      |             Disabled |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+===================== PSO FINAL (25% data, FE≈250, particles=12, iters=21, seed=123) =====================
+[FFO] Loading arrays from: .
+[FFO] Shapes -> train_X:(2283, 224, 224, 3) train_y:(2283,) val_X:(488, 224, 224, 3) val_y:(488,)
+[PSO] Using subset of train: 570 samples (~25%)
+[PSO] Fixed epochs this run: 8
+2025-10-06 16:00:43.691077: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-10-06 16:00:44.796544: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-10-06 16:00:48.349786: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+[PSO] evaluate_model() starting with hparams={'dense_units': 384, 'dropout_rate': 0.2661463056406668, 'learning_rate': 2.3680169898403323e-05, 'batch_size': 16, 'l2_weight_decay': 2.2480802082380958e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1759759252.472929 2595929 gpu_device.cc:2020] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 62926 MB memory:  -> device: 0, name: NVIDIA A100-SXM-64GB, pci bus id: 0000:1d:00.0, compute capability: 8.0
+2025-10-06 16:00:57.793816: I external/local_xla/xla/service/service.cc:163] XLA service 0x151014011750 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2025-10-06 16:00:57.793836: I external/local_xla/xla/service/service.cc:171]   StreamExecutor device (0): NVIDIA A100-SXM-64GB, Compute Capability 8.0
+2025-10-06 16:00:57.910436: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:269] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2025-10-06 16:00:58.350394: I external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:473] Loaded cuDNN version 91300
+Could not load symbol cuFuncGetName. Error: /lib64/libcuda.so.1: undefined symbol: cuFuncGetName
+I0000 00:00:1759759263.443800 2596061 device_compiler.h:196] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+[PSO] evaluate_model() done -> val_acc=0.7807
+[PSO] evaluate_model() starting with hparams={'dense_units': 480, 'dropout_rate': 0.33297231933913185, 'learning_rate': 0.0002470235797757177, 'batch_size': 32, 'l2_weight_decay': 1.0615511141121371e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+2025-10-06 16:01:18.860042: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:01:19.451269: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1226', 360 bytes spill stores, 360 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8689
+[PSO] evaluate_model() starting with hparams={'dense_units': 448, 'dropout_rate': 0.31412888901252867, 'learning_rate': 0.00018185710823175158, 'batch_size': 24, 'l2_weight_decay': 7.158376176321298e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+2025-10-06 16:01:40.260521: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 4 bytes spill stores, 4 bytes spill loads
+
+2025-10-06 16:01:40.572227: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 28 bytes spill stores, 28 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8709
+[PSO] evaluate_model() starting with hparams={'dense_units': 432, 'dropout_rate': 0.4054495110558143, 'learning_rate': 2.4740362625505463e-05, 'batch_size': 16, 'l2_weight_decay': 9.898694865079398e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:01:47.902662: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 272 bytes spill stores, 272 bytes spill loads
+
+2025-10-06 16:01:47.925779: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 292 bytes spill stores, 292 bytes spill loads
+
+2025-10-06 16:01:50.708738: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 500 bytes spill stores, 504 bytes spill loads
+
+2025-10-06 16:01:50.728775: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 496 bytes spill stores, 500 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8176
+[PSO] evaluate_model() starting with hparams={'dense_units': 192, 'dropout_rate': 0.2544684750280697, 'learning_rate': 6.315986948932556e-05, 'batch_size': 32, 'l2_weight_decay': 6.873864763133043e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:02:02.177805: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:02:02.751843: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1322', 360 bytes spill stores, 360 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8258
+[PSO] evaluate_model() starting with hparams={'dense_units': 480, 'dropout_rate': 0.5094070753281326, 'learning_rate': 2.3475680938023556e-05, 'batch_size': 32, 'l2_weight_decay': 2.8940356239893183e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:02:16.214785: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 584 bytes spill stores, 592 bytes spill loads
+
+2025-10-06 16:02:18.627525: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:02:18.635302: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:02:19.155209: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 860 bytes spill stores, 864 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8115
+[PSO] evaluate_model() starting with hparams={'dense_units': 432, 'dropout_rate': 0.5095665138531209, 'learning_rate': 3.2265321942968944e-05, 'batch_size': 24, 'l2_weight_decay': 1.3898681833918547e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:02:29.428308: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:02:29.467082: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:02:29.948581: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 868 bytes spill stores, 872 bytes spill loads
+
+2025-10-06 16:02:32.678318: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:02:32.678630: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:02:33.243835: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 868 bytes spill stores, 872 bytes spill loads
+
+2025-10-06 16:02:35.773815: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 32 bytes spill stores, 32 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8402
+[PSO] evaluate_model() starting with hparams={'dense_units': 224, 'dropout_rate': 0.47948909383109456, 'learning_rate': 1.972399762957909e-05, 'batch_size': 24, 'l2_weight_decay': 1.0689292312591297e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7828
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.3904937603279729, 'learning_rate': 1.6479424021518292e-05, 'batch_size': 16, 'l2_weight_decay': 1.0147573802417483e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:02:55.877338: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 292 bytes spill stores, 292 bytes spill loads
+
+2025-10-06 16:02:58.568624: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 492 bytes spill stores, 496 bytes spill loads
+
+2025-10-06 16:03:00.506696: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 16 bytes spill stores, 16 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.7951
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.37818963138488504, 'learning_rate': 0.00026230939068629865, 'batch_size': 24, 'l2_weight_decay': 3.4053975874826625e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+2025-10-06 16:03:10.140063: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:03:10.160114: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:03:10.651734: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 860 bytes spill stores, 868 bytes spill loads
+
+2025-10-06 16:03:15.066202: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:03:15.071780: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:03:15.608538: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 860 bytes spill stores, 868 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8730
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.47764309630116036, 'learning_rate': 9.15731971954728e-05, 'batch_size': 24, 'l2_weight_decay': 6.19881804812228e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+2025-10-06 16:03:32.023032: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 4 bytes spill stores, 4 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8361
+[PSO] evaluate_model() starting with hparams={'dense_units': 304, 'dropout_rate': 0.4370675206474317, 'learning_rate': 0.0004049657767695145, 'batch_size': 24, 'l2_weight_decay': 9.360149948924573e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:03:39.220092: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:03:39.251469: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:03:39.730234: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 860 bytes spill stores, 868 bytes spill loads
+
+2025-10-06 16:03:42.217932: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:03:42.227341: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:03:42.725942: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 860 bytes spill stores, 868 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.3873
+[PSO] evaluate_model() starting with hparams={'dense_units': 368, 'dropout_rate': 0.4161463056406668, 'learning_rate': 0.00014002899502129623, 'batch_size': 24, 'l2_weight_decay': 3.495597954575472e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+2025-10-06 16:03:51.760224: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:03:51.764716: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:03:52.273153: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 860 bytes spill stores, 868 bytes spill loads
+
+2025-10-06 16:03:55.210712: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:03:55.216648: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:03:55.726567: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 860 bytes spill stores, 868 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8381
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.4102892619862052, 'learning_rate': 0.0001774859488578814, 'batch_size': 24, 'l2_weight_decay': 4.9705729756134935e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:04:06.737819: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:04:06.744017: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:04:07.250766: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 856 bytes spill stores, 864 bytes spill loads
+
+2025-10-06 16:04:09.741472: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:04:09.745061: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:04:10.310442: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 856 bytes spill stores, 864 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8238
+[PSO] evaluate_model() starting with hparams={'dense_units': 368, 'dropout_rate': 0.3865886276074444, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 7.158376176321298e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.2971
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.3764640882646423, 'learning_rate': 4.64741084660464e-05, 'batch_size': 24, 'l2_weight_decay': 1.2631987272214229e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7910
+[PSO] evaluate_model() starting with hparams={'dense_units': 384, 'dropout_rate': 0.4044684750280697, 'learning_rate': 5.326170076641481e-05, 'batch_size': 24, 'l2_weight_decay': 2.8886930418124314e-05, 'unfrozen_blocks': 2, 'epochs': 8}
+2025-10-06 16:04:50.327024: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 4 bytes spill stores, 4 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8094
+[PSO] evaluate_model() starting with hparams={'dense_units': 400, 'dropout_rate': 0.47222716335941156, 'learning_rate': 8.099240368386283e-05, 'batch_size': 24, 'l2_weight_decay': 4.939544388664278e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+2025-10-06 16:05:00.777352: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:05:00.780958: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:05:01.301866: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 864 bytes spill stores, 868 bytes spill loads
+
+2025-10-06 16:05:04.368913: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:05:04.382121: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:05:04.904071: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 864 bytes spill stores, 868 bytes spill loads
+
+2025-10-06 16:05:07.481241: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 36 bytes spill stores, 36 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8299
+[PSO] evaluate_model() starting with hparams={'dense_units': 368, 'dropout_rate': 0.359566513853121, 'learning_rate': 0.00022815027943040448, 'batch_size': 24, 'l2_weight_decay': 4.654094467476616e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7357
+[PSO] evaluate_model() starting with hparams={'dense_units': 416, 'dropout_rate': 0.3327695059344436, 'learning_rate': 0.00013946972475982776, 'batch_size': 24, 'l2_weight_decay': 2.307014138746095e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:05:30.359803: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:05:30.375099: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:05:30.945222: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 868 bytes spill stores, 872 bytes spill loads
+
+2025-10-06 16:05:33.350746: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:05:33.398152: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:05:33.853323: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 868 bytes spill stores, 872 bytes spill loads
+
+2025-10-06 16:05:36.211933: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 36 bytes spill stores, 36 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8361
+[PSO] evaluate_model() starting with hparams={'dense_units': 368, 'dropout_rate': 0.39212512306136593, 'learning_rate': 0.00011652712475664081, 'batch_size': 32, 'l2_weight_decay': 6.340857067079158e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:05:45.171628: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:05:45.421977: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:05:45.750990: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1322', 360 bytes spill stores, 360 bytes spill loads
+
+2025-10-06 16:05:45.873430: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 580 bytes spill stores, 588 bytes spill loads
+
+2025-10-06 16:05:48.253995: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:05:48.270737: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:05:48.834153: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 860 bytes spill stores, 868 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8709
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.3795056433897476, 'learning_rate': 0.0002194603226111041, 'batch_size': 24, 'l2_weight_decay': 3.4177182612198584e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8627
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.4351441313860971, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1.3732527888484537e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:06:15.597145: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 856 bytes spill stores, 864 bytes spill loads
+
+2025-10-06 16:06:18.645714: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 856 bytes spill stores, 864 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.3443
+[PSO] evaluate_model() starting with hparams={'dense_units': 272, 'dropout_rate': 0.40373063690758226, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 7.508410596961568e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:06:26.395718: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:06:26.402102: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:06:26.901409: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 852 bytes spill stores, 860 bytes spill loads
+
+2025-10-06 16:06:29.347194: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:06:29.413345: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:06:29.852735: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 852 bytes spill stores, 860 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.3689
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.5397949805953041, 'learning_rate': 0.0004999999999999999, 'batch_size': 32, 'l2_weight_decay': 5.2357221786803575e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+2025-10-06 16:06:39.586043: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:06:39.741603: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:06:40.158503: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1418', 360 bytes spill stores, 360 bytes spill loads
+
+2025-10-06 16:06:40.364101: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 580 bytes spill stores, 588 bytes spill loads
+
+2025-10-06 16:06:44.775824: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:06:44.833523: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:06:45.283367: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 860 bytes spill stores, 868 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.7357
+[PSO] evaluate_model() starting with hparams={'dense_units': 416, 'dropout_rate': 0.3816717246500959, 'learning_rate': 0.00027595506288070074, 'batch_size': 32, 'l2_weight_decay': 3.2659557910984095e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:06:59.000280: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:06:59.576010: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1322', 360 bytes spill stores, 360 bytes spill loads
+
+2025-10-06 16:06:59.775104: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 584 bytes spill stores, 592 bytes spill loads
+
+2025-10-06 16:07:02.276675: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:07:02.284216: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:07:02.796720: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 868 bytes spill stores, 872 bytes spill loads
+
+2025-10-06 16:07:05.162850: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 12 bytes spill stores, 12 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.4467
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.3665639093212428, 'learning_rate': 7.208635956504456e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8750
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.39519697481771676, 'learning_rate': 0.0003286215724594055, 'batch_size': 24, 'l2_weight_decay': 1.3122991038467108e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.6393
+[PSO] evaluate_model() starting with hparams={'dense_units': 432, 'dropout_rate': 0.4537724937353669, 'learning_rate': 0.00018084229758353845, 'batch_size': 24, 'l2_weight_decay': 2.8886930418124317e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7992
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.36477734546977864, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8033
+[PSO] evaluate_model() starting with hparams={'dense_units': 416, 'dropout_rate': 0.39176052447011794, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1.6683586246363615e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.2828
+[PSO] evaluate_model() starting with hparams={'dense_units': 512, 'dropout_rate': 0.25, 'learning_rate': 0.0004999999999999999, 'batch_size': 32, 'l2_weight_decay': 9.830303450502646e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+2025-10-06 16:08:17.690309: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:08:18.323868: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1418', 492 bytes spill stores, 492 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8258
+[PSO] evaluate_model() starting with hparams={'dense_units': 384, 'dropout_rate': 0.37435687850841365, 'learning_rate': 0.0004999999999999999, 'batch_size': 32, 'l2_weight_decay': 3.5379887841036775e-05, 'unfrozen_blocks': 2, 'epochs': 8}
+2025-10-06 16:08:34.621102: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:08:35.192698: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1418', 360 bytes spill stores, 360 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8094
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.38047789597495185, 'learning_rate': 0.00023646361584114613, 'batch_size': 24, 'l2_weight_decay': 3.411785055721769e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8381
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.3591846319613104, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 6.3051183323150226e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+2025-10-06 16:09:06.224881: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:09:06.293377: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:09:06.733896: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 860 bytes spill stores, 868 bytes spill loads
+
+2025-10-06 16:09:09.584541: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:09:09.632569: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:09:10.087504: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 860 bytes spill stores, 868 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8402
+[PSO] evaluate_model() starting with hparams={'dense_units': 304, 'dropout_rate': 0.40534124753333856, 'learning_rate': 0.00011506541220367603, 'batch_size': 24, 'l2_weight_decay': 5.696861488904723e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8422
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.38979498059530404, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 1.9134662111854963e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8279
+[PSO] evaluate_model() starting with hparams={'dense_units': 512, 'dropout_rate': 0.25, 'learning_rate': 0.0002457115209751941, 'batch_size': 32, 'l2_weight_decay': 1.5078418273890179e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8566
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.34653919103504116, 'learning_rate': 1.0392886470681784e-05, 'batch_size': 24, 'l2_weight_decay': 2.735363328949033e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7930
+[PSO] evaluate_model() starting with hparams={'dense_units': 432, 'dropout_rate': 0.40031003919015296, 'learning_rate': 4.64741084660464e-05, 'batch_size': 16, 'l2_weight_decay': 4.527371670409443e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8361
+[PSO] evaluate_model() starting with hparams={'dense_units': 240, 'dropout_rate': 0.30377249373536686, 'learning_rate': 3.877839404022562e-05, 'batch_size': 24, 'l2_weight_decay': 2.3709327806951257e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:10:28.051170: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:10:30.367722: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8176
+[PSO] evaluate_model() starting with hparams={'dense_units': 272, 'dropout_rate': 0.3689965238870682, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8525
+[PSO] evaluate_model() starting with hparams={'dense_units': 416, 'dropout_rate': 0.541760524470118, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8545
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.4, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8340
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.3718089308974144, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 7.928583730017259e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8463
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.3564992423898455, 'learning_rate': 3.3441005253033035e-05, 'batch_size': 24, 'l2_weight_decay': 2.600510703601287e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8422
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.29216395327047506, 'learning_rate': 1.0195266329174771e-05, 'batch_size': 24, 'l2_weight_decay': 3.3586108360143537e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7111
+[PSO] evaluate_model() starting with hparams={'dense_units': 368, 'dropout_rate': 0.3538305359914715, 'learning_rate': 1.627270664984893e-05, 'batch_size': 32, 'l2_weight_decay': 1.2360237625995142e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7439
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.25, 'learning_rate': 1.927992955166496e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8402
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.4, 'learning_rate': 0.00018407894304946792, 'batch_size': 32, 'l2_weight_decay': 1.5078418273890179e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:12:31.995952: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:12:32.656199: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1322', 360 bytes spill stores, 360 bytes spill loads
+
+2025-10-06 16:12:32.695115: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 580 bytes spill stores, 588 bytes spill loads
+
+2025-10-06 16:12:35.299888: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:12:35.345818: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:12:35.801886: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 860 bytes spill stores, 868 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8443
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.3894800644704437, 'learning_rate': 1.1696120824482812e-05, 'batch_size': 24, 'l2_weight_decay': 1.2822211730893993e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7889
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.36061226204271785, 'learning_rate': 1.231789495421225e-05, 'batch_size': 24, 'l2_weight_decay': 2.7168170787792973e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7295
+[PSO] evaluate_model() starting with hparams={'dense_units': 128, 'dropout_rate': 0.25, 'learning_rate': 2.8186214815635004e-05, 'batch_size': 32, 'l2_weight_decay': 2.7721368037797464e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:13:16.767476: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:13:17.336442: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1322', 492 bytes spill stores, 492 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8053
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.3698498693989366, 'learning_rate': 1.005383165874961e-05, 'batch_size': 32, 'l2_weight_decay': 2.4037735601629472e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7971
+[PSO] evaluate_model() starting with hparams={'dense_units': 384, 'dropout_rate': 0.55, 'learning_rate': 1.008887833338644e-05, 'batch_size': 24, 'l2_weight_decay': 2.565593243261096e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8299
+[PSO] evaluate_model() starting with hparams={'dense_units': 128, 'dropout_rate': 0.45700829540623394, 'learning_rate': 2.341556304180708e-05, 'batch_size': 16, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7316
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.4035716666991522, 'learning_rate': 1.1548337150299183e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7766
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.38748464411561534, 'learning_rate': 1e-05, 'batch_size': 32, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:14:19.195026: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:14:19.766317: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1322', 360 bytes spill stores, 360 bytes spill loads
+
+2025-10-06 16:14:19.894511: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 580 bytes spill stores, 588 bytes spill loads
+
+2025-10-06 16:14:22.931251: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 856 bytes spill stores, 864 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.7807
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.3608459707133839, 'learning_rate': 7.20914195736236e-05, 'batch_size': 24, 'l2_weight_decay': 1.57470717733492e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8217
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.34796591378650477, 'learning_rate': 1.3407049050545813e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7582
+[PSO] evaluate_model() starting with hparams={'dense_units': 304, 'dropout_rate': 0.33443289253333625, 'learning_rate': 1e-05, 'batch_size': 24, 'l2_weight_decay': 1.4983084689357837e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7643
+[PSO] evaluate_model() starting with hparams={'dense_units': 272, 'dropout_rate': 0.4792513897555976, 'learning_rate': 0.00013642640053373843, 'batch_size': 24, 'l2_weight_decay': 1.418770925913552e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8053
+[PSO] evaluate_model() starting with hparams={'dense_units': 400, 'dropout_rate': 0.37714236189271444, 'learning_rate': 8.270406348568989e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8648
+[PSO] evaluate_model() starting with hparams={'dense_units': 368, 'dropout_rate': 0.3483506887415617, 'learning_rate': 2.1303842257684566e-05, 'batch_size': 32, 'l2_weight_decay': 1.4755076988841252e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7500
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.4, 'learning_rate': 0.0001763492009115222, 'batch_size': 32, 'l2_weight_decay': 2.6664379789136888e-05, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8361
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.3672964917742071, 'learning_rate': 1e-05, 'batch_size': 24, 'l2_weight_decay': 2.549671896786022e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8033
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.4, 'learning_rate': 7.133914284103585e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8320
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.4239623312175553, 'learning_rate': 0.00016557303412162886, 'batch_size': 24, 'l2_weight_decay': 3.2171537926229707e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8238
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.4304740796768321, 'learning_rate': 1e-05, 'batch_size': 32, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7787
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.3899142255465705, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8197
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.43251825020069246, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 3.4592576749043754e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.3279
+[PSO] evaluate_model() starting with hparams={'dense_units': 256, 'dropout_rate': 0.3746121370078298, 'learning_rate': 9.480215299341608e-05, 'batch_size': 24, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:17:46.119257: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 4 bytes spill stores, 4 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8443
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.4142064056822661, 'learning_rate': 7.071067811865475e-05, 'batch_size': 32, 'l2_weight_decay': 1.6779045219351922e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7971
+[PSO] evaluate_model() starting with hparams={'dense_units': 464, 'dropout_rate': 0.3292513897555976, 'learning_rate': 5.8810886960462576e-05, 'batch_size': 32, 'l2_weight_decay': 3.269124384893296e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:18:12.487274: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:18:12.752870: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:18:13.159684: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1322', 360 bytes spill stores, 360 bytes spill loads
+
+2025-10-06 16:18:13.299139: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 584 bytes spill stores, 592 bytes spill loads
+
+2025-10-06 16:18:15.800294: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:18:15.806046: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:18:16.317592: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 864 bytes spill stores, 868 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8402
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.3574143660207891, 'learning_rate': 0.0003947202461002093, 'batch_size': 24, 'l2_weight_decay': 1.956154318062634e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4529
+[PSO] evaluate_model() starting with hparams={'dense_units': 384, 'dropout_rate': 0.4581569362112547, 'learning_rate': 0.00015064091325737297, 'batch_size': 24, 'l2_weight_decay': 3.778904982504859e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8484
+[PSO] evaluate_model() starting with hparams={'dense_units': 512, 'dropout_rate': 0.5109902579344769, 'learning_rate': 0.000290205803322886, 'batch_size': 24, 'l2_weight_decay': 1.081278620036884e-05, 'unfrozen_blocks': 2, 'epochs': 8}
+2025-10-06 16:19:02.143511: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 4 bytes spill stores, 4 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8402
+[PSO] evaluate_model() starting with hparams={'dense_units': 240, 'dropout_rate': 0.3642166723712935, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8197
+[PSO] evaluate_model() starting with hparams={'dense_units': 400, 'dropout_rate': 0.48426265256277823, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 2.9015909207632648e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4980
+[PSO] evaluate_model() starting with hparams={'dense_units': 512, 'dropout_rate': 0.27396233121755525, 'learning_rate': 0.0004999999999999999, 'batch_size': 32, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8361
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.4026591671166711, 'learning_rate': 7.071067811865475e-05, 'batch_size': 32, 'l2_weight_decay': 5.837067211588723e-05, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8115
+[PSO] evaluate_model() starting with hparams={'dense_units': 368, 'dropout_rate': 0.34415259568350814, 'learning_rate': 0.0004999999999999999, 'batch_size': 32, 'l2_weight_decay': 2.3182626800896013e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4672
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.3740402798289254, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 5.02527006289886e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8484
+[PSO] evaluate_model() starting with hparams={'dense_units': 256, 'dropout_rate': 0.38614303400867833, 'learning_rate': 0.0004999999999999999, 'batch_size': 16, 'l2_weight_decay': 7.671314447423364e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4652
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.26471299664342995, 'learning_rate': 0.00024954284096051797, 'batch_size': 16, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:21:01.237480: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 292 bytes spill stores, 292 bytes spill loads
+
+2025-10-06 16:21:03.990399: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 492 bytes spill stores, 496 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.7070
+[PSO] evaluate_model() starting with hparams={'dense_units': 512, 'dropout_rate': 0.25, 'learning_rate': 8.841269908848876e-05, 'batch_size': 32, 'l2_weight_decay': 2.3736951445844834e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8463
+[PSO] evaluate_model() starting with hparams={'dense_units': 240, 'dropout_rate': 0.35491762938127436, 'learning_rate': 5.582187253781613e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8238
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.5312287461044305, 'learning_rate': 0.0004999999999999999, 'batch_size': 16, 'l2_weight_decay': 1.4315120062197825e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.3156
+[PSO] evaluate_model() starting with hparams={'dense_units': 512, 'dropout_rate': 0.3870296280983218, 'learning_rate': 8.919191642227484e-05, 'batch_size': 24, 'l2_weight_decay': 1.081278620036884e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8361
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.36411247118278456, 'learning_rate': 0.0004999999999999999, 'batch_size': 32, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.2869
+[PSO] evaluate_model() starting with hparams={'dense_units': 448, 'dropout_rate': 0.434977785725865, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:22:20.872212: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 868 bytes spill stores, 872 bytes spill loads
+
+2025-10-06 16:22:23.814424: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 868 bytes spill stores, 872 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8258
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.25, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8422
+[PSO] evaluate_model() starting with hparams={'dense_units': 384, 'dropout_rate': 0.34714431580106275, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 2.3344361418255155e-05, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7357
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.400112487599669, 'learning_rate': 0.0004247518231190525, 'batch_size': 32, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.2951
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.31390880136137733, 'learning_rate': 1.0383807680184985e-05, 'batch_size': 24, 'l2_weight_decay': 1.4891298251100973e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7910
+[PSO] evaluate_model() starting with hparams={'dense_units': 272, 'dropout_rate': 0.35730596476160437, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 7.671314447423364e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8115
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.25, 'learning_rate': 3.5290687007947685e-05, 'batch_size': 32, 'l2_weight_decay': 1.4743670335386534e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8361
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.4, 'learning_rate': 0.00041893304128234914, 'batch_size': 24, 'l2_weight_decay': 2.3736951445844836e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.3504
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.3608422592391414, 'learning_rate': 1.1945251344924618e-05, 'batch_size': 24, 'l2_weight_decay': 1.56329001637537e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7684
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.39081668715818985, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8361
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.47118163629576365, 'learning_rate': 2.6358263898747172e-05, 'batch_size': 16, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8299
+[PSO] evaluate_model() starting with hparams={'dense_units': 384, 'dropout_rate': 0.3714942340896732, 'learning_rate': 0.00048466306092785757, 'batch_size': 24, 'l2_weight_decay': 2.8048960004012337e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8586
+[PSO] evaluate_model() starting with hparams={'dense_units': 400, 'dropout_rate': 0.39423506231074334, 'learning_rate': 1.0220099838170575e-05, 'batch_size': 24, 'l2_weight_decay': 2.1703241637021483e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7807
+[PSO] evaluate_model() starting with hparams={'dense_units': 128, 'dropout_rate': 0.37094590744217076, 'learning_rate': 1.0256578370722646e-05, 'batch_size': 16, 'l2_weight_decay': 4.022028337436583e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7316
+[PSO] evaluate_model() starting with hparams={'dense_units': 400, 'dropout_rate': 0.3119458244618015, 'learning_rate': 0.0001866312660375384, 'batch_size': 24, 'l2_weight_decay': 2.3344361418255155e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7336
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.4126726456808009, 'learning_rate': 0.0001883573859887385, 'batch_size': 24, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8627
+[PSO] evaluate_model() starting with hparams={'dense_units': 304, 'dropout_rate': 0.3059484829853636, 'learning_rate': 1e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7520
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.3428235747156937, 'learning_rate': 1.2641380160615247e-05, 'batch_size': 32, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8074
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.4, 'learning_rate': 1e-05, 'batch_size': 24, 'l2_weight_decay': 1.5120313913728367e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7746
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.5193658296646803, 'learning_rate': 7.307124466039424e-05, 'batch_size': 32, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8197
+[PSO] evaluate_model() starting with hparams={'dense_units': 400, 'dropout_rate': 0.3779041065940141, 'learning_rate': 8.446568228973923e-05, 'batch_size': 24, 'l2_weight_decay': 2.0998813480208104e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8402
+[PSO] evaluate_model() starting with hparams={'dense_units': 384, 'dropout_rate': 0.25, 'learning_rate': 2.515856285871264e-05, 'batch_size': 32, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8361
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.55, 'learning_rate': 1e-05, 'batch_size': 32, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:27:38.257924: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:27:38.860792: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1322', 360 bytes spill stores, 360 bytes spill loads
+
+2025-10-06 16:27:38.957087: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 580 bytes spill stores, 588 bytes spill loads
+
+2025-10-06 16:27:41.452465: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:27:41.461061: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:27:41.965437: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 856 bytes spill stores, 864 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.7910
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.3759606502944407, 'learning_rate': 6.85417073945434e-05, 'batch_size': 24, 'l2_weight_decay': 2.804896000401234e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8422
+[PSO] evaluate_model() starting with hparams={'dense_units': 256, 'dropout_rate': 0.5442350623107434, 'learning_rate': 7.22670189997395e-05, 'batch_size': 24, 'l2_weight_decay': 1.7786529524099966e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8484
+[PSO] evaluate_model() starting with hparams={'dense_units': 128, 'dropout_rate': 0.32540665763919, 'learning_rate': 1e-05, 'batch_size': 24, 'l2_weight_decay': 4.022028337436583e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+2025-10-06 16:28:31.881803: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 4 bytes spill stores, 4 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.6844
+[PSO] evaluate_model() starting with hparams={'dense_units': 256, 'dropout_rate': 0.44597103380099323, 'learning_rate': 2.63936467593148e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8422
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.3860326460724193, 'learning_rate': 2.66377569838418e-05, 'batch_size': 16, 'l2_weight_decay': 3.3918385451626357e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+2025-10-06 16:28:58.183679: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 292 bytes spill stores, 292 bytes spill loads
+
+2025-10-06 16:29:01.483353: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 492 bytes spill stores, 496 bytes spill loads
+
+2025-10-06 16:29:03.853735: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 16 bytes spill stores, 16 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.7951
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.3739837603067484, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8525
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.3817921085154335, 'learning_rate': 8.938805635128129e-05, 'batch_size': 24, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8463
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.25, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8176
+[PSO] evaluate_model() starting with hparams={'dense_units': 400, 'dropout_rate': 0.36936582966468023, 'learning_rate': 1.279750783687346e-05, 'batch_size': 32, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+2025-10-06 16:30:05.690060: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:30:06.256372: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1226', 360 bytes spill stores, 360 bytes spill loads
+
+2025-10-06 16:30:10.280321: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 8 bytes spill stores, 8 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.7951
+[PSO] evaluate_model() starting with hparams={'dense_units': 432, 'dropout_rate': 0.3758014457709713, 'learning_rate': 0.0004929009617703548, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.2869
+[PSO] evaluate_model() starting with hparams={'dense_units': 464, 'dropout_rate': 0.4, 'learning_rate': 4.3006667026255717e-05, 'batch_size': 24, 'l2_weight_decay': 3.1264852165496944e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:30:34.008546: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:30:34.021114: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:30:34.526419: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 864 bytes spill stores, 868 bytes spill loads
+
+2025-10-06 16:30:36.910397: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:30:36.963061: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:30:37.422882: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 864 bytes spill stores, 868 bytes spill loads
+
+2025-10-06 16:30:39.656324: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 24 bytes spill stores, 24 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8422
+[PSO] evaluate_model() starting with hparams={'dense_units': 480, 'dropout_rate': 0.4295076105630861, 'learning_rate': 7.071067811865475e-05, 'batch_size': 32, 'l2_weight_decay': 1.6435930274594925e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8197
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.376818647305595, 'learning_rate': 4.514769302162824e-05, 'batch_size': 24, 'l2_weight_decay': 4.410070422218636e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8484
+[PSO] evaluate_model() starting with hparams={'dense_units': 256, 'dropout_rate': 0.55, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4713
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.27678460085987366, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8176
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.46810328204822, 'learning_rate': 4.1809975256874796e-05, 'batch_size': 32, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8033
+[PSO] evaluate_model() starting with hparams={'dense_units': 384, 'dropout_rate': 0.3078168221455525, 'learning_rate': 0.0001883573859887385, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8381
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.4342760665416963, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1.899660713997398e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.3873
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.39037621607009954, 'learning_rate': 0.0004404735179460617, 'batch_size': 16, 'l2_weight_decay': 6.269879583957715e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8586
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.2643939078614719, 'learning_rate': 0.0002552838246635652, 'batch_size': 24, 'l2_weight_decay': 1.4635223660474701e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7705
+[PSO] evaluate_model() starting with hparams={'dense_units': 384, 'dropout_rate': 0.25, 'learning_rate': 6.660132485583611e-05, 'batch_size': 24, 'l2_weight_decay': 6.55343932187461e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8443
+[PSO] evaluate_model() starting with hparams={'dense_units': 240, 'dropout_rate': 0.35673425485448523, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1.9053995088120487e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.2828
+[PSO] evaluate_model() starting with hparams={'dense_units': 272, 'dropout_rate': 0.55, 'learning_rate': 0.00020713413722978942, 'batch_size': 16, 'l2_weight_decay': 3.126485216549694e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:33:31.399674: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 292 bytes spill stores, 292 bytes spill loads
+
+2025-10-06 16:33:34.113298: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 492 bytes spill stores, 496 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.7643
+[PSO] evaluate_model() starting with hparams={'dense_units': 448, 'dropout_rate': 0.3003447648919133, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1.9841305612001297e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.2910
+[PSO] evaluate_model() starting with hparams={'dense_units': 384, 'dropout_rate': 0.3675234168209869, 'learning_rate': 0.00031924239890521866, 'batch_size': 32, 'l2_weight_decay': 3.429864059860081e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.3627
+[PSO] evaluate_model() starting with hparams={'dense_units': 416, 'dropout_rate': 0.40443161191212157, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 2.1806812171794597e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8566
+[PSO] evaluate_model() starting with hparams={'dense_units': 512, 'dropout_rate': 0.3133104178523392, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 2.437755837026808e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.3484
+[PSO] evaluate_model() starting with hparams={'dense_units': 464, 'dropout_rate': 0.4532942997723109, 'learning_rate': 0.0001223800024582063, 'batch_size': 24, 'l2_weight_decay': 1.102026260573009e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8627
+[PSO] evaluate_model() starting with hparams={'dense_units': 272, 'dropout_rate': 0.42522049280079083, 'learning_rate': 0.0004999999999999999, 'batch_size': 32, 'l2_weight_decay': 2.7131828871924975e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:35:02.181356: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:35:02.348244: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:35:02.757418: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1322', 360 bytes spill stores, 360 bytes spill loads
+
+2025-10-06 16:35:02.967704: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 580 bytes spill stores, 588 bytes spill loads
+
+2025-10-06 16:35:05.449201: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:35:05.461368: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:35:05.953725: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 852 bytes spill stores, 860 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.4775
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.36488142204482127, 'learning_rate': 0.00023440514579744104, 'batch_size': 24, 'l2_weight_decay': 1.962691827404387e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7008
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.3903286334333253, 'learning_rate': 0.0004999999999999999, 'batch_size': 16, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:35:35.733943: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 292 bytes spill stores, 292 bytes spill loads
+
+2025-10-06 16:35:38.422664: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 492 bytes spill stores, 496 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.2869
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.4143939078614719, 'learning_rate': 3.6102584709368916e-05, 'batch_size': 32, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8299
+[PSO] evaluate_model() starting with hparams={'dense_units': 384, 'dropout_rate': 0.4, 'learning_rate': 0.0004709424844156982, 'batch_size': 16, 'l2_weight_decay': 6.553439321874609e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4939
+[PSO] evaluate_model() starting with hparams={'dense_units': 192, 'dropout_rate': 0.3682079994258754, 'learning_rate': 0.00019986137551996887, 'batch_size': 24, 'l2_weight_decay': 1.8285674992199943e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:36:24.055722: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 4 bytes spill stores, 4 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8566
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.55, 'learning_rate': 0.0002716356791303019, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.5430
+[PSO] evaluate_model() starting with hparams={'dense_units': 384, 'dropout_rate': 0.35463743430934863, 'learning_rate': 0.0004999999999999999, 'batch_size': 16, 'l2_weight_decay': 1.9841305612001297e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4570
+[PSO] evaluate_model() starting with hparams={'dense_units': 368, 'dropout_rate': 0.361036490231341, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 3.4298640598600812e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.3115
+[PSO] evaluate_model() starting with hparams={'dense_units': 512, 'dropout_rate': 0.25443161191212155, 'learning_rate': 1.0024987794880657e-05, 'batch_size': 24, 'l2_weight_decay': 4.02293349927367e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7889
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.34793804561931707, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 3.971322495357094e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8135
+[PSO] evaluate_model() starting with hparams={'dense_units': 272, 'dropout_rate': 0.30329429977231087, 'learning_rate': 0.00017290815225470994, 'batch_size': 24, 'l2_weight_decay': 2.7093467219551724e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8545
+[PSO] evaluate_model() starting with hparams={'dense_units': 272, 'dropout_rate': 0.40567130607177504, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 2.7302978830192755e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8279
+[PSO] evaluate_model() starting with hparams={'dense_units': 304, 'dropout_rate': 0.2977746601350787, 'learning_rate': 3.3149893627678383e-05, 'batch_size': 24, 'l2_weight_decay': 1.5398633018859787e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7869
+[PSO] evaluate_model() starting with hparams={'dense_units': 304, 'dropout_rate': 0.36743675250595537, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8463
+[PSO] evaluate_model() starting with hparams={'dense_units': 304, 'dropout_rate': 0.2643939078614719, 'learning_rate': 1.7690812971468667e-05, 'batch_size': 24, 'l2_weight_decay': 1.5731182697167742e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7930
+[PSO] evaluate_model() starting with hparams={'dense_units': 400, 'dropout_rate': 0.41807687868318794, 'learning_rate': 0.0003635501633821654, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4980
+[PSO] evaluate_model() starting with hparams={'dense_units': 384, 'dropout_rate': 0.37417998596500907, 'learning_rate': 2.826466678548824e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7971
+[PSO] evaluate_model() starting with hparams={'dense_units': 384, 'dropout_rate': 0.4, 'learning_rate': 3.8415086145049967e-05, 'batch_size': 32, 'l2_weight_decay': 6.834384645758976e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8299
+[PSO] evaluate_model() starting with hparams={'dense_units': 512, 'dropout_rate': 0.5046374343093487, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 1.9841305612001297e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8299
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.365388308023111, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 5.257132520428107e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8566
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.40443161191212157, 'learning_rate': 1e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7746
+[PSO] evaluate_model() starting with hparams={'dense_units': 128, 'dropout_rate': 0.29744246298448, 'learning_rate': 1.0295644336937716e-05, 'batch_size': 24, 'l2_weight_decay': 1.7817004370788965e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7049
+[PSO] evaluate_model() starting with hparams={'dense_units': 144, 'dropout_rate': 0.3523967090499804, 'learning_rate': 8.162337763895511e-05, 'batch_size': 24, 'l2_weight_decay': 1.8190624940070176e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8402
+[PSO] evaluate_model() starting with hparams={'dense_units': 400, 'dropout_rate': 0.36288745657245625, 'learning_rate': 1.0250382999793412e-05, 'batch_size': 16, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+2025-10-06 16:41:21.101839: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 272 bytes spill stores, 272 bytes spill loads
+
+2025-10-06 16:41:21.122382: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 292 bytes spill stores, 292 bytes spill loads
+
+2025-10-06 16:41:24.410957: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 504 bytes spill stores, 508 bytes spill loads
+
+2025-10-06 16:41:24.433759: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 496 bytes spill stores, 500 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.7275
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.35613299060755943, 'learning_rate': 7.319168012084075e-05, 'batch_size': 24, 'l2_weight_decay': 5.813956997199807e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8238
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.3766797230406147, 'learning_rate': 5.8754808013424975e-05, 'batch_size': 24, 'l2_weight_decay': 2.8634520722554533e-05, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8484
+[PSO] evaluate_model() starting with hparams={'dense_units': 304, 'dropout_rate': 0.25, 'learning_rate': 2.2643263894685482e-05, 'batch_size': 16, 'l2_weight_decay': 1.0222786704266739e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+2025-10-06 16:42:17.872550: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 292 bytes spill stores, 292 bytes spill loads
+
+2025-10-06 16:42:21.141737: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 492 bytes spill stores, 496 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.7869
+[PSO] evaluate_model() starting with hparams={'dense_units': 448, 'dropout_rate': 0.4032252909911508, 'learning_rate': 0.00010486991244710138, 'batch_size': 32, 'l2_weight_decay': 3.896142070186824e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+2025-10-06 16:42:37.774284: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:42:38.343425: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1226', 360 bytes spill stores, 360 bytes spill loads
+
+2025-10-06 16:42:42.263791: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 8 bytes spill stores, 8 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8607
+[PSO] evaluate_model() starting with hparams={'dense_units': 464, 'dropout_rate': 0.3693149523370065, 'learning_rate': 1.8788218677712315e-05, 'batch_size': 24, 'l2_weight_decay': 2.606322565308479e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7643
+[PSO] evaluate_model() starting with hparams={'dense_units': 448, 'dropout_rate': 0.25, 'learning_rate': 1.0499101735311685e-05, 'batch_size': 32, 'l2_weight_decay': 1.6616983155836438e-05, 'unfrozen_blocks': 2, 'epochs': 8}
+2025-10-06 16:43:14.843695: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 584 bytes spill stores, 592 bytes spill loads
+
+2025-10-06 16:43:18.341617: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1416', 868 bytes spill stores, 872 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.7172
+[PSO] evaluate_model() starting with hparams={'dense_units': 368, 'dropout_rate': 0.4179187886371977, 'learning_rate': 1.5791631644088073e-05, 'batch_size': 32, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7664
+[PSO] evaluate_model() starting with hparams={'dense_units': 368, 'dropout_rate': 0.37883670006064873, 'learning_rate': 0.00018824789864179526, 'batch_size': 24, 'l2_weight_decay': 5.257132520428107e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8238
+[PSO] evaluate_model() starting with hparams={'dense_units': 192, 'dropout_rate': 0.5271329809118054, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 6.083370819564918e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8197
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.3012766006618948, 'learning_rate': 1e-05, 'batch_size': 24, 'l2_weight_decay': 4.514708394188481e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7643
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.44041187527721104, 'learning_rate': 4.1773074814973154e-05, 'batch_size': 32, 'l2_weight_decay': 2.8759447044217824e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8258
+[PSO] evaluate_model() starting with hparams={'dense_units': 416, 'dropout_rate': 0.3351255249119525, 'learning_rate': 7.248115328913226e-05, 'batch_size': 32, 'l2_weight_decay': 4.097952107923969e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8217
+[PSO] evaluate_model() starting with hparams={'dense_units': 400, 'dropout_rate': 0.4446489693074771, 'learning_rate': 0.00015886892189323598, 'batch_size': 24, 'l2_weight_decay': 3.5541781456260522e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7787
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.38603432707366436, 'learning_rate': 0.000415459231736065, 'batch_size': 24, 'l2_weight_decay': 2.8634520722554533e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.2828
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.3596693660527152, 'learning_rate': 3.451752699979186e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8299
+[PSO] evaluate_model() starting with hparams={'dense_units': 368, 'dropout_rate': 0.34553458568613327, 'learning_rate': 3.949964228938572e-05, 'batch_size': 32, 'l2_weight_decay': 3.113985705357602e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8279
+[PSO] evaluate_model() starting with hparams={'dense_units': 512, 'dropout_rate': 0.3607870980167563, 'learning_rate': 0.00013285276833426127, 'batch_size': 24, 'l2_weight_decay': 1.312573639174978e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8852
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.4, 'learning_rate': 7.423986033406341e-05, 'batch_size': 24, 'l2_weight_decay': 1.6616983155836436e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8279
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.4027087064095518, 'learning_rate': 5.3274624131163044e-05, 'batch_size': 24, 'l2_weight_decay': 6.194020621127543e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8484
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.38258506321917585, 'learning_rate': 0.0003698068459607383, 'batch_size': 32, 'l2_weight_decay': 5.524474482097525e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4836
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.37713298091180536, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1.3021991543850382e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.3668
+[PSO] evaluate_model() starting with hparams={'dense_units': 512, 'dropout_rate': 0.42378174758165627, 'learning_rate': 7.071067811865475e-05, 'batch_size': 16, 'l2_weight_decay': 1.4963758311934363e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8668
+[PSO] evaluate_model() starting with hparams={'dense_units': 512, 'dropout_rate': 0.37423494741058094, 'learning_rate': 7.528640347939933e-05, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8340
+[PSO] evaluate_model() starting with hparams={'dense_units': 256, 'dropout_rate': 0.4136220928358346, 'learning_rate': 0.0004999999999999999, 'batch_size': 32, 'l2_weight_decay': 2.8756406611092622e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:48:22.298211: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:48:22.862275: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1322', 492 bytes spill stores, 492 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.2869
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.3124831843461595, 'learning_rate': 0.00017867581989970671, 'batch_size': 24, 'l2_weight_decay': 5.5365670084670915e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8648
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.39751624316737943, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8893
+[PSO] evaluate_model() starting with hparams={'dense_units': 304, 'dropout_rate': 0.3624376013195739, 'learning_rate': 5.277709570142452e-05, 'batch_size': 24, 'l2_weight_decay': 1.2834325984035222e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8463
+[PSO] evaluate_model() starting with hparams={'dense_units': 480, 'dropout_rate': 0.36067296801523135, 'learning_rate': 0.0002793046491726754, 'batch_size': 24, 'l2_weight_decay': 1.8481082753588677e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:49:27.246355: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:49:27.284723: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:49:27.767659: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 860 bytes spill stores, 864 bytes spill loads
+
+2025-10-06 16:49:30.288178: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:49:30.293432: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:49:30.806143: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 860 bytes spill stores, 864 bytes spill loads
+
+2025-10-06 16:49:33.069318: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 28 bytes spill stores, 28 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.5635
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.35576363655086396, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8730
+[PSO] evaluate_model() starting with hparams={'dense_units': 208, 'dropout_rate': 0.55, 'learning_rate': 0.0004999999999999999, 'batch_size': 16, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8197
+[PSO] evaluate_model() starting with hparams={'dense_units': 208, 'dropout_rate': 0.383930025292029, 'learning_rate': 0.0003767084798830987, 'batch_size': 16, 'l2_weight_decay': 1.0602744839408109e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4877
+[PSO] evaluate_model() starting with hparams={'dense_units': 256, 'dropout_rate': 0.3811196504395301, 'learning_rate': 0.0004999999999999999, 'batch_size': 32, 'l2_weight_decay': 5.5244744820975254e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8730
+[PSO] evaluate_model() starting with hparams={'dense_units': 416, 'dropout_rate': 0.27743160512796117, 'learning_rate': 0.0002520228411711488, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8709
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.5019155020850603, 'learning_rate': 0.0004999999999999999, 'batch_size': 16, 'l2_weight_decay': 1.7373356717480463e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8627
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.3206848527120859, 'learning_rate': 0.0004999999999999999, 'batch_size': 16, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.2828
+[PSO] evaluate_model() starting with hparams={'dense_units': 192, 'dropout_rate': 0.45711395726298076, 'learning_rate': 0.00011481184452178983, 'batch_size': 24, 'l2_weight_decay': 1.5282697033650584e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8463
+[PSO] evaluate_model() starting with hparams={'dense_units': 240, 'dropout_rate': 0.2511532978488532, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8566
+[PSO] evaluate_model() starting with hparams={'dense_units': 256, 'dropout_rate': 0.40899815926109456, 'learning_rate': 0.00020827220630661043, 'batch_size': 24, 'l2_weight_decay': 3.162277660168379e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8545
+[PSO] evaluate_model() starting with hparams={'dense_units': 224, 'dropout_rate': 0.4254637741979328, 'learning_rate': 0.00037319042261808665, 'batch_size': 24, 'l2_weight_decay': 1.5853269018780695e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8627
+[PSO] evaluate_model() starting with hparams={'dense_units': 304, 'dropout_rate': 0.3901272544423795, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1.848108275358864e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8730
+[PSO] evaluate_model() starting with hparams={'dense_units': 272, 'dropout_rate': 0.4149784981891953, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 2.588481041352444e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8197
+[PSO] evaluate_model() starting with hparams={'dense_units': 368, 'dropout_rate': 0.5308111900731232, 'learning_rate': 0.00012665643354047067, 'batch_size': 24, 'l2_weight_decay': 5.511953183500827e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8545
+[PSO] evaluate_model() starting with hparams={'dense_units': 160, 'dropout_rate': 0.4021644276841375, 'learning_rate': 9.204396382594539e-05, 'batch_size': 16, 'l2_weight_decay': 1.0602744839408108e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8258
+[PSO] evaluate_model() starting with hparams={'dense_units': 176, 'dropout_rate': 0.38006669322347997, 'learning_rate': 0.0002993576015057528, 'batch_size': 16, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8525
+[PSO] evaluate_model() starting with hparams={'dense_units': 400, 'dropout_rate': 0.25, 'learning_rate': 0.0001941841455290359, 'batch_size': 24, 'l2_weight_decay': 2.3239046610323365e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8627
+[PSO] evaluate_model() starting with hparams={'dense_units': 160, 'dropout_rate': 0.4123295984133821, 'learning_rate': 0.00047817169858293054, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.2848
+[PSO] evaluate_model() starting with hparams={'dense_units': 176, 'dropout_rate': 0.42342972697571324, 'learning_rate': 8.285266074741205e-05, 'batch_size': 16, 'l2_weight_decay': 3.142300737501954e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8340
+[PSO] evaluate_model() starting with hparams={'dense_units': 304, 'dropout_rate': 0.4167470531426156, 'learning_rate': 9.677483148808047e-05, 'batch_size': 16, 'l2_weight_decay': 1.5486341634673231e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8566
+[PSO] evaluate_model() starting with hparams={'dense_units': 240, 'dropout_rate': 0.3057405613304402, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8443
+[PSO] evaluate_model() starting with hparams={'dense_units': 272, 'dropout_rate': 0.400875577037708, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4980
+[PSO] evaluate_model() starting with hparams={'dense_units': 208, 'dropout_rate': 0.47131816940050975, 'learning_rate': 0.0004999999999999999, 'batch_size': 16, 'l2_weight_decay': 1.0232093087687043e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.3709
+[PSO] evaluate_model() starting with hparams={'dense_units': 128, 'dropout_rate': 0.4231394375057872, 'learning_rate': 0.00018803015465431965, 'batch_size': 24, 'l2_weight_decay': 1.2990653598635323e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8525
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.4009683806286241, 'learning_rate': 4.490987643180969e-05, 'batch_size': 24, 'l2_weight_decay': 2.014113994872798e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8443
+[PSO] evaluate_model() starting with hparams={'dense_units': 368, 'dropout_rate': 0.38081119007312314, 'learning_rate': 5.9966014339210274e-05, 'batch_size': 32, 'l2_weight_decay': 1.7483125527660144e-05, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8115
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.4182755866845524, 'learning_rate': 0.00020479963951789868, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8053
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.39854665569346637, 'learning_rate': 0.0004999999999999999, 'batch_size': 32, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4775
+[PSO] evaluate_model() starting with hparams={'dense_units': 224, 'dropout_rate': 0.4, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1.014581999039083e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:57:16.539888: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:57:18.899748: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.4508
+[PSO] evaluate_model() starting with hparams={'dense_units': 352, 'dropout_rate': 0.3039766200072245, 'learning_rate': 6.762369012789594e-05, 'batch_size': 16, 'l2_weight_decay': 3.95828726216798e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8443
+[PSO] evaluate_model() starting with hparams={'dense_units': 368, 'dropout_rate': 0.4708878231266549, 'learning_rate': 0.0004999999999999999, 'batch_size': 32, 'l2_weight_decay': 3.142300737501954e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4467
+[PSO] evaluate_model() starting with hparams={'dense_units': 464, 'dropout_rate': 0.3243502396601662, 'learning_rate': 0.0004999999999999999, 'batch_size': 32, 'l2_weight_decay': 4.021628040641973e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.2828
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.4466134526451968, 'learning_rate': 5.8205953704339896e-05, 'batch_size': 24, 'l2_weight_decay': 2.3337720221139916e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8443
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.38809998766622267, 'learning_rate': 0.00023774811390587708, 'batch_size': 24, 'l2_weight_decay': 3.162277660168379e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8566
+[PSO] evaluate_model() starting with hparams={'dense_units': 208, 'dropout_rate': 0.46994405383056914, 'learning_rate': 0.0001776325187112703, 'batch_size': 24, 'l2_weight_decay': 1.5528170730353426e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8648
+[PSO] evaluate_model() starting with hparams={'dense_units': 256, 'dropout_rate': 0.4119508197527248, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1.2990653598635325e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4016
+[PSO] evaluate_model() starting with hparams={'dense_units': 512, 'dropout_rate': 0.3631552758766233, 'learning_rate': 0.0003175607816718254, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8627
+[PSO] evaluate_model() starting with hparams={'dense_units': 240, 'dropout_rate': 0.46949149440888105, 'learning_rate': 0.0004240237537998528, 'batch_size': 32, 'l2_weight_decay': 1.7483125527660145e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 16:59:48.384968: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 16:59:48.537473: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 16:59:48.949512: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1322', 360 bytes spill stores, 360 bytes spill loads
+
+2025-10-06 16:59:51.371866: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.4549
+[PSO] evaluate_model() starting with hparams={'dense_units': 480, 'dropout_rate': 0.36491412328858147, 'learning_rate': 0.0004999999999999999, 'batch_size': 32, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.3217
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.39222901002335664, 'learning_rate': 0.00036749242415769933, 'batch_size': 24, 'l2_weight_decay': 1.1088548786280612e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8934
+[PSO] evaluate_model() starting with hparams={'dense_units': 400, 'dropout_rate': 0.3631348277424769, 'learning_rate': 0.00018387070480954204, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8074
+[PSO] evaluate_model() starting with hparams={'dense_units': 512, 'dropout_rate': 0.41755653106926316, 'learning_rate': 0.00032692169996883315, 'batch_size': 16, 'l2_weight_decay': 9.93921451687215e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4898
+[PSO] evaluate_model() starting with hparams={'dense_units': 496, 'dropout_rate': 0.3718942351980925, 'learning_rate': 0.0001870313372494381, 'batch_size': 32, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 17:01:14.955936: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 17:01:15.120948: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 17:01:15.527420: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1322', 360 bytes spill stores, 360 bytes spill loads
+
+2025-10-06 17:01:15.770215: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 584 bytes spill stores, 592 bytes spill loads
+
+2025-10-06 17:01:18.169433: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 17:01:18.195608: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 17:01:18.771201: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 868 bytes spill stores, 872 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8033
+[PSO] evaluate_model() starting with hparams={'dense_units': 480, 'dropout_rate': 0.3211068045503438, 'learning_rate': 7.071067811865475e-05, 'batch_size': 32, 'l2_weight_decay': 5.402269399736922e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8627
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.5433636488408314, 'learning_rate': 0.0004115782456976898, 'batch_size': 24, 'l2_weight_decay': 2.3337720221139915e-06, 'unfrozen_blocks': 2, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8094
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.38765746067449613, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 3.757166819264835e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8811
+[PSO] evaluate_model() starting with hparams={'dense_units': 384, 'dropout_rate': 0.3610460940721273, 'learning_rate': 0.00012762793677115558, 'batch_size': 32, 'l2_weight_decay': 1.5528170730353426e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7971
+[PSO] evaluate_model() starting with hparams={'dense_units': 448, 'dropout_rate': 0.35484750157106615, 'learning_rate': 0.00017726967777138397, 'batch_size': 24, 'l2_weight_decay': 1e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.7725
+[PSO] evaluate_model() starting with hparams={'dense_units': 368, 'dropout_rate': 0.35118536615329576, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4775
+[PSO] evaluate_model() starting with hparams={'dense_units': 208, 'dropout_rate': 0.46143820817050385, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1.0542610026645793e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8504
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.37853890638135246, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 4.341105129770074e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8402
+[PSO] evaluate_model() starting with hparams={'dense_units': 272, 'dropout_rate': 0.38591136435324697, 'learning_rate': 0.00027010136362660536, 'batch_size': 16, 'l2_weight_decay': 1.229559141857255e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8422
+[PSO] evaluate_model() starting with hparams={'dense_units': 496, 'dropout_rate': 0.32555076229181645, 'learning_rate': 0.00035509403071078767, 'batch_size': 24, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+2025-10-06 17:04:18.464479: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_235', 24 bytes spill stores, 24 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.8648
+[PSO] evaluate_model() starting with hparams={'dense_units': 400, 'dropout_rate': 0.536433837960245, 'learning_rate': 0.00043057075323064335, 'batch_size': 24, 'l2_weight_decay': 3.485198789305948e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8648
+[PSO] evaluate_model() starting with hparams={'dense_units': 304, 'dropout_rate': 0.2983909349145013, 'learning_rate': 0.00011732323091738591, 'batch_size': 24, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8607
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.42341068550985006, 'learning_rate': 0.0003949780871929168, 'batch_size': 24, 'l2_weight_decay': 7.902319663759069e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4652
+[PSO] evaluate_model() starting with hparams={'dense_units': 304, 'dropout_rate': 0.3933636488408314, 'learning_rate': 0.0004999999999999999, 'batch_size': 32, 'l2_weight_decay': 2.2107247382577893e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+2025-10-06 17:05:21.107907: I external/local_xla/xla/service/gpu/autotuning/dot_search_space.cc:208] All configs were filtered out because none of them sufficiently match the hints. Maybe the hints set does not contain a good representative set of valid configs? Working around this by using the full hints set instead.
+2025-10-06 17:05:21.271169: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 17:05:21.687181: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1322', 360 bytes spill stores, 360 bytes spill loads
+
+2025-10-06 17:05:21.812468: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 580 bytes spill stores, 588 bytes spill loads
+
+2025-10-06 17:05:24.314009: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 17:05:24.357378: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 8 bytes spill stores, 8 bytes spill loads
+
+2025-10-06 17:05:24.815410: I external/local_xla/xla/stream_executor/cuda/subprocess_compilation.cc:346] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_1320', 860 bytes spill stores, 868 bytes spill loads
+
+[PSO] evaluate_model() done -> val_acc=0.4406
+[PSO] evaluate_model() starting with hparams={'dense_units': 304, 'dropout_rate': 0.40156116107865036, 'learning_rate': 0.0001501447696071557, 'batch_size': 24, 'l2_weight_decay': 2.2606534766735746e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8361
+[PSO] evaluate_model() starting with hparams={'dense_units': 272, 'dropout_rate': 0.48182071271070126, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 8.786786753305028e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.2869
+[PSO] evaluate_model() starting with hparams={'dense_units': 512, 'dropout_rate': 0.41036945846920614, 'learning_rate': 0.0004999999999999999, 'batch_size': 24, 'l2_weight_decay': 1e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8750
+[PSO] evaluate_model() starting with hparams={'dense_units': 288, 'dropout_rate': 0.3966451511064159, 'learning_rate': 7.071067811865475e-05, 'batch_size': 24, 'l2_weight_decay': 8.588066615246185e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8545
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.5241169089092793, 'learning_rate': 7.071067811865475e-05, 'batch_size': 16, 'l2_weight_decay': 1.0542610026645793e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8607
+[PSO] evaluate_model() starting with hparams={'dense_units': 176, 'dropout_rate': 0.4055856959479382, 'learning_rate': 0.00013770100420963202, 'batch_size': 16, 'l2_weight_decay': 4.341105129770074e-06, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8504
+[PSO] evaluate_model() starting with hparams={'dense_units': 320, 'dropout_rate': 0.3931475869117385, 'learning_rate': 0.00036786291188374635, 'batch_size': 32, 'l2_weight_decay': 1.0065401217530971e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4344
+[PSO] evaluate_model() starting with hparams={'dense_units': 496, 'dropout_rate': 0.3131153126856204, 'learning_rate': 0.0004999999999999999, 'batch_size': 32, 'l2_weight_decay': 1.5159962331952332e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8730
+[PSO] evaluate_model() starting with hparams={'dense_units': 336, 'dropout_rate': 0.386433837960245, 'learning_rate': 0.00019044692882758227, 'batch_size': 32, 'l2_weight_decay': 1.0115475698288325e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8709
+[PSO] evaluate_model() starting with hparams={'dense_units': 128, 'dropout_rate': 0.4483909349145013, 'learning_rate': 0.00016643694806410363, 'batch_size': 16, 'l2_weight_decay': 6.386648017302276e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8381
+[PSO] evaluate_model() starting with hparams={'dense_units': 224, 'dropout_rate': 0.4742224762308217, 'learning_rate': 0.0004999999999999999, 'batch_size': 16, 'l2_weight_decay': 1.4940232563439409e-05, 'unfrozen_blocks': 1, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.4283
+[PSO] evaluate_model() starting with hparams={'dense_units': 272, 'dropout_rate': 0.25, 'learning_rate': 0.00011234712596290467, 'batch_size': 24, 'l2_weight_decay': 1.927426921000114e-05, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8586
+[PSO] evaluate_model() starting with hparams={'dense_units': 240, 'dropout_rate': 0.3932115149795163, 'learning_rate': 0.0004160391384481603, 'batch_size': 24, 'l2_weight_decay': 1.3459833631260408e-06, 'unfrozen_blocks': 0, 'epochs': 8}
+[PSO] evaluate_model() done -> val_acc=0.8648
+\n[PSO] Best validation accuracy: 0.8934
+[PSO] Best hyperparameters:
+  - dense_units: 288
+  - dropout_rate: 0.39222901002335664
+  - learning_rate: 0.00036749242415769933
+  - batch_size: 24
+  - l2_weight_decay: 1.1088548786280612e-05
+  - unfrozen_blocks: 0
+  - epochs: 8
+\n[PSO] Results saved to: runs/pso_final_sub25_FE250_s123/pso_full_20251006_170919\n

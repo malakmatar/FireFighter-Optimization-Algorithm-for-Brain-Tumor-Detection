@@ -6,7 +6,7 @@
 #SBATCH --cpus-per-task=32
 #SBATCH --exclusive
 #SBATCH --partition=boost_usr_prod
-#SBATCH --account=IscrC_ASCEND
+#SBATCH --account=IscrB_SWING
 #SBATCH --output=job_pso_sub25_FE250_s123_%j.out
 
 module purge

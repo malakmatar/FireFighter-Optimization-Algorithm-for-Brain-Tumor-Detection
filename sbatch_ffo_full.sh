@@ -6,7 +6,7 @@
 #SBATCH --cpus-per-task=32
 #SBATCH --exclusive
 #SBATCH --partition=boost_usr_prod
-#SBATCH --account=IscrC_ASCEND
+#SBATCH --account=IscrB_SWING
 #SBATCH --output=job_%j.out
 
 # ---- in your sbatch, BEFORE srun ----

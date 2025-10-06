@@ -236,5 +236,33 @@
         ],
         "random_seed": 408724,
         "seed_timestamp": "2025-08-19T21:24:59.575520"
+    },
+    {
+        "timestamp": "2025-10-06T15:56:47.140925",
+        "used_kaggle_test": false,
+        "force_resplit": false,
+        "regenerated_seed": false,
+        "image_size": 224,
+        "split_ratio": [
+            0.7,
+            0.15,
+            0.15
+        ],
+        "random_seed": 408724,
+        "seed_timestamp": "2025-08-19T21:24:59.575520"
+    },
+    {
+        "timestamp": "2025-10-06T15:57:42.766931",
+        "used_kaggle_test": false,
+        "force_resplit": true,
+        "regenerated_seed": false,
+        "image_size": 224,
+        "split_ratio": [
+            0.7,
+            0.15,
+            0.15
+        ],
+        "random_seed": 408724,
+        "seed_timestamp": "2025-08-19T21:24:59.575520"
     }
 ]
