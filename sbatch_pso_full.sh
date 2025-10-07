@@ -7,7 +7,7 @@
 #SBATCH --exclusive
 #SBATCH --partition=boost_usr_prod
 #SBATCH --account=IscrB_SWING
-#SBATCH --output=job_%j.out
+#SBATCH --output=job_pso_full_%j.out
 
 # ---- in your sbatch, BEFORE srun ----
 module purge

@@ -1,0 +1,20 @@
+{
+  "best_hparams": {
+    "dense_units": 480,
+    "dropout_rate": 0.42479649531168134,
+    "learning_rate": 0.00011770500805701182,
+    "batch_size": 16,
+    "l2_weight_decay": 1.861540491468589e-05,
+    "unfrozen_blocks": 0,
+    "epochs": 8
+  },
+  "best_val_accuracy": 0.8893442749977112,
+  "history_best_acc": [
+    0.8586065769195557,
+    0.875,
+    0.8893442749977112,
+    0.8893442749977112
+  ],
+  "eval_count": 252,
+  "wall_time_sec": 2427.001689195633
+}

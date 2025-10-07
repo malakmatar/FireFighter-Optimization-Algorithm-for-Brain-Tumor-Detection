@@ -1,0 +1,18 @@
+{
+  "num_agents": 12,
+  "max_iter": 999,
+  "no_improve_limit": 30,
+  "use_additional_conditions": false,
+  "target_fitness": null,
+  "crossover_probability": 0.5,
+  "mutation_probability": 0.7,
+  "step_size": 0.29108969999999995,
+  "initial_temp": 1.0,
+  "cooling_rate": 0.97,
+  "stagnation_perturb_after": 12,
+  "perturb_base": 0.06,
+  "perturb_growth": 0.008,
+  "fixed_epochs": 8,
+  "paper_mode": false,
+  "seed": 222
+}
